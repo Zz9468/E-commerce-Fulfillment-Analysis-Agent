@@ -1,0 +1,6 @@
+order_id,customer_id,order_status,order_purchase_timestamp,order_estimated_delivery_date,order_delivered_customer_date,order_delivered_carrier_date
+A,sp,delivered,2018-07-31 09:00:00,2018-08-03 00:00:00,2018-08-03 09:00:00,2018-08-01 09:00:00
+B,sp,delivered,2018-08-01 09:00:00,2018-08-04 00:00:00,2018-08-06 09:00:00,2018-08-02 09:00:00
+C,rj,delivered,2018-08-01 09:00:00,2018-08-03 00:00:00,2018-08-03 09:00:00,2018-08-04 09:00:00
+D,sp,canceled,2018-08-01 09:00:00,2018-08-05 00:00:00,,
+E,sp,delivered,2018-08-01 09:00:00,,2018-08-02 09:00:00,2018-08-01 09:00:00
