@@ -1,0 +1,2639 @@
+{
+  "selected": {
+    "thresholds": {
+      "min_change_pp": "2",
+      "min_samples": 5,
+      "concentration": "0.60"
+    },
+    "passed": 8,
+    "total": 8,
+    "sql_attempts": 16,
+    "failures": {}
+  },
+  "trials": [
+    {
+      "thresholds": {
+        "min_change_pp": "2",
+        "min_samples": 5,
+        "concentration": "0.60"
+      },
+      "passed": 8,
+      "total": 8,
+      "sql_attempts": 16,
+      "failures": {}
+    },
+    {
+      "thresholds": {
+        "min_change_pp": "1",
+        "min_samples": 1,
+        "concentration": "0.50"
+      },
+      "passed": 5,
+      "total": 8,
+      "sql_attempts": 20,
+      "failures": {
+        "D10": [
+          "answer",
+          "path"
+        ],
+        "D11": [
+          "stop"
+        ],
+        "D13": [
+          "status",
+          "stop"
+        ]
+      }
+    },
+    {
+      "thresholds": {
+        "min_change_pp": "1",
+        "min_samples": 1,
+        "concentration": "0.60"
+      },
+      "passed": 6,
+      "total": 8,
+      "sql_attempts": 20,
+      "failures": {
+        "D11": [
+          "stop"
+        ],
+        "D13": [
+          "status",
+          "stop"
+        ]
+      }
+    },
+    {
+      "thresholds": {
+        "min_change_pp": "1",
+        "min_samples": 1,
+        "concentration": "0.85"
+      },
+      "passed": 6,
+      "total": 8,
+      "sql_attempts": 20,
+      "failures": {
+        "D11": [
+          "stop"
+        ],
+        "D13": [
+          "status",
+          "stop"
+        ]
+      }
+    },
+    {
+      "thresholds": {
+        "min_change_pp": "1",
+        "min_samples": 5,
+        "concentration": "0.50"
+      },
+      "passed": 6,
+      "total": 8,
+      "sql_attempts": 18,
+      "failures": {
+        "D10": [
+          "answer",
+          "path"
+        ],
+        "D11": [
+          "stop"
+        ]
+      }
+    },
+    {
+      "thresholds": {
+        "min_change_pp": "1",
+        "min_samples": 5,
+        "concentration": "0.60"
+      },
+      "passed": 7,
+      "total": 8,
+      "sql_attempts": 18,
+      "failures": {
+        "D11": [
+          "stop"
+        ]
+      }
+    },
+    {
+      "thresholds": {
+        "min_change_pp": "1",
+        "min_samples": 5,
+        "concentration": "0.85"
+      },
+      "passed": 7,
+      "total": 8,
+      "sql_attempts": 18,
+      "failures": {
+        "D11": [
+          "stop"
+        ]
+      }
+    },
+    {
+      "thresholds": {
+        "min_change_pp": "1",
+        "min_samples": 20,
+        "concentration": "0.50"
+      },
+      "passed": 6,
+      "total": 8,
+      "sql_attempts": 18,
+      "failures": {
+        "D09": [
+          "answer",
+          "path"
+        ],
+        "D11": [
+          "stop"
+        ]
+      }
+    },
+    {
+      "thresholds": {
+        "min_change_pp": "1",
+        "min_samples": 20,
+        "concentration": "0.60"
+      },
+      "passed": 6,
+      "total": 8,
+      "sql_attempts": 18,
+      "failures": {
+        "D09": [
+          "answer",
+          "path"
+        ],
+        "D11": [
+          "stop"
+        ]
+      }
+    },
+    {
+      "thresholds": {
+        "min_change_pp": "1",
+        "min_samples": 20,
+        "concentration": "0.85"
+      },
+      "passed": 6,
+      "total": 8,
+      "sql_attempts": 18,
+      "failures": {
+        "D09": [
+          "answer",
+          "path"
+        ],
+        "D11": [
+          "stop"
+        ]
+      }
+    },
+    {
+      "thresholds": {
+        "min_change_pp": "2",
+        "min_samples": 1,
+        "concentration": "0.50"
+      },
+      "passed": 6,
+      "total": 8,
+      "sql_attempts": 18,
+      "failures": {
+        "D10": [
+          "answer",
+          "path"
+        ],
+        "D13": [
+          "status",
+          "stop"
+        ]
+      }
+    },
+    {
+      "thresholds": {
+        "min_change_pp": "2",
+        "min_samples": 1,
+        "concentration": "0.60"
+      },
+      "passed": 7,
+      "total": 8,
+      "sql_attempts": 18,
+      "failures": {
+        "D13": [
+          "status",
+          "stop"
+        ]
+      }
+    },
+    {
+      "thresholds": {
+        "min_change_pp": "2",
+        "min_samples": 1,
+        "concentration": "0.85"
+      },
+      "passed": 7,
+      "total": 8,
+      "sql_attempts": 18,
+      "failures": {
+        "D13": [
+          "status",
+          "stop"
+        ]
+      }
+    },
+    {
+      "thresholds": {
+        "min_change_pp": "2",
+        "min_samples": 5,
+        "concentration": "0.50"
+      },
+      "passed": 7,
+      "total": 8,
+      "sql_attempts": 16,
+      "failures": {
+        "D10": [
+          "answer",
+          "path"
+        ]
+      }
+    },
+    {
+      "thresholds": {
+        "min_change_pp": "2",
+        "min_samples": 5,
+        "concentration": "0.85"
+      },
+      "passed": 8,
+      "total": 8,
+      "sql_attempts": 16,
+      "failures": {}
+    },
+    {
+      "thresholds": {
+        "min_change_pp": "2",
+        "min_samples": 20,
+        "concentration": "0.50"
+      },
+      "passed": 7,
+      "total": 8,
+      "sql_attempts": 16,
+      "failures": {
+        "D09": [
+          "answer",
+          "path"
+        ]
+      }
+    },
+    {
+      "thresholds": {
+        "min_change_pp": "2",
+        "min_samples": 20,
+        "concentration": "0.60"
+      },
+      "passed": 7,
+      "total": 8,
+      "sql_attempts": 16,
+      "failures": {
+        "D09": [
+          "answer",
+          "path"
+        ]
+      }
+    },
+    {
+      "thresholds": {
+        "min_change_pp": "2",
+        "min_samples": 20,
+        "concentration": "0.85"
+      },
+      "passed": 7,
+      "total": 8,
+      "sql_attempts": 16,
+      "failures": {
+        "D09": [
+          "answer",
+          "path"
+        ]
+      }
+    },
+    {
+      "thresholds": {
+        "min_change_pp": "3",
+        "min_samples": 1,
+        "concentration": "0.50"
+      },
+      "passed": 3,
+      "total": 8,
+      "sql_attempts": 12,
+      "failures": {
+        "D10": [
+          "answer",
+          "path"
+        ],
+        "D12": [
+          "answer",
+          "path"
+        ],
+        "D13": [
+          "answer",
+          "status"
+        ],
+        "D14": [
+          "answer",
+          "path"
+        ],
+        "D15": [
+          "answer",
+          "path"
+        ]
+      }
+    },
+    {
+      "thresholds": {
+        "min_change_pp": "3",
+        "min_samples": 1,
+        "concentration": "0.60"
+      },
+      "passed": 4,
+      "total": 8,
+      "sql_attempts": 12,
+      "failures": {
+        "D12": [
+          "answer",
+          "path"
+        ],
+        "D13": [
+          "answer",
+          "status"
+        ],
+        "D14": [
+          "answer",
+          "path"
+        ],
+        "D15": [
+          "answer",
+          "path"
+        ]
+      }
+    },
+    {
+      "thresholds": {
+        "min_change_pp": "3",
+        "min_samples": 1,
+        "concentration": "0.85"
+      },
+      "passed": 4,
+      "total": 8,
+      "sql_attempts": 12,
+      "failures": {
+        "D12": [
+          "answer",
+          "path"
+        ],
+        "D13": [
+          "answer",
+          "status"
+        ],
+        "D14": [
+          "answer",
+          "path"
+        ],
+        "D15": [
+          "answer",
+          "path"
+        ]
+      }
+    },
+    {
+      "thresholds": {
+        "min_change_pp": "3",
+        "min_samples": 5,
+        "concentration": "0.50"
+      },
+      "passed": 4,
+      "total": 8,
+      "sql_attempts": 12,
+      "failures": {
+        "D10": [
+          "answer",
+          "path"
+        ],
+        "D12": [
+          "answer",
+          "path"
+        ],
+        "D14": [
+          "answer",
+          "path"
+        ],
+        "D15": [
+          "answer",
+          "path"
+        ]
+      }
+    },
+    {
+      "thresholds": {
+        "min_change_pp": "3",
+        "min_samples": 5,
+        "concentration": "0.60"
+      },
+      "passed": 5,
+      "total": 8,
+      "sql_attempts": 12,
+      "failures": {
+        "D12": [
+          "answer",
+          "path"
+        ],
+        "D14": [
+          "answer",
+          "path"
+        ],
+        "D15": [
+          "answer",
+          "path"
+        ]
+      }
+    },
+    {
+      "thresholds": {
+        "min_change_pp": "3",
+        "min_samples": 5,
+        "concentration": "0.85"
+      },
+      "passed": 5,
+      "total": 8,
+      "sql_attempts": 12,
+      "failures": {
+        "D12": [
+          "answer",
+          "path"
+        ],
+        "D14": [
+          "answer",
+          "path"
+        ],
+        "D15": [
+          "answer",
+          "path"
+        ]
+      }
+    },
+    {
+      "thresholds": {
+        "min_change_pp": "3",
+        "min_samples": 20,
+        "concentration": "0.50"
+      },
+      "passed": 4,
+      "total": 8,
+      "sql_attempts": 12,
+      "failures": {
+        "D09": [
+          "answer",
+          "path"
+        ],
+        "D12": [
+          "answer",
+          "path"
+        ],
+        "D14": [
+          "answer",
+          "path"
+        ],
+        "D15": [
+          "answer",
+          "path"
+        ]
+      }
+    },
+    {
+      "thresholds": {
+        "min_change_pp": "3",
+        "min_samples": 20,
+        "concentration": "0.60"
+      },
+      "passed": 4,
+      "total": 8,
+      "sql_attempts": 12,
+      "failures": {
+        "D09": [
+          "answer",
+          "path"
+        ],
+        "D12": [
+          "answer",
+          "path"
+        ],
+        "D14": [
+          "answer",
+          "path"
+        ],
+        "D15": [
+          "answer",
+          "path"
+        ]
+      }
+    },
+    {
+      "thresholds": {
+        "min_change_pp": "3",
+        "min_samples": 20,
+        "concentration": "0.85"
+      },
+      "passed": 4,
+      "total": 8,
+      "sql_attempts": 12,
+      "failures": {
+        "D09": [
+          "answer",
+          "path"
+        ],
+        "D12": [
+          "answer",
+          "path"
+        ],
+        "D14": [
+          "answer",
+          "path"
+        ],
+        "D15": [
+          "answer",
+          "path"
+        ]
+      }
+    }
+  ],
+  "development": [
+    {
+      "id": "D01",
+      "category": "single",
+      "account": "demo-hq",
+      "dataset": "olist",
+      "dataset_id": "3a062a9d-7610-4c19-8ab9-d5cecf80ac91",
+      "question": "2017年11月超期率是多少？",
+      "effective_query": {
+        "dataset_id": "3a062a9d-7610-4c19-8ab9-d5cecf80ac91",
+        "month": "2017-11",
+        "baseline_month": null,
+        "metric": "late_rate",
+        "state": null,
+        "group_by": "none",
+        "city": null,
+        "intent": "single",
+        "ranking": "late_count",
+        "condition_sources": {}
+      },
+      "expected": {
+        "status": "answered",
+        "paths": [
+          [
+            "overall"
+          ]
+        ]
+      },
+      "status": "answered",
+      "answer": "全部地区，2017-11，送达超期率。2017-11 为 12.40%（904/7,288）。",
+      "pending_fields": [],
+      "analysis_id": "de6d5ac7-1636-4d48-84d7-185cc8e82958",
+      "trace": [
+        {
+          "sequence": 1,
+          "tool": "compare_delivery",
+          "parameters": {
+            "month": "2017-11",
+            "baseline_month": null,
+            "state": null,
+            "metric": "late_rate",
+            "group_by": "none"
+          },
+          "status": "ok",
+          "duration_ms": 4.49,
+          "evidence_id": "ab88aa78-6450-47c4-804b-8bd866fd97d8"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "ab88aa78-6450-47c4-804b-8bd866fd97d8",
+          "result_sha256": "3dcbeb11a8c97cb4e9e81f7ba0ced8e04338e6085e3f9e2d75411c7bb7f8b0e7",
+          "result": {
+            "dataset_id": "3a062a9d-7610-4c19-8ab9-d5cecf80ac91",
+            "month": "2017-11",
+            "baseline_month": null,
+            "metric": "late_rate",
+            "group_by": "none",
+            "state": null,
+            "metric_version": "1"
+          },
+          "row_count": 1,
+          "sample_rows": [
+            {
+              "region": null,
+              "current": {
+                "value": "0.1240395170142700329308452250",
+                "sample_count": 7288,
+                "numerator": 904
+              },
+              "baseline": null,
+              "delta": null,
+              "delta_pp": null,
+              "late_count_delta": null
+            }
+          ]
+        }
+      ],
+      "duration_ms": 28.4,
+      "model_requests": [],
+      "passed": true,
+      "failures": [],
+      "path": [
+        "overall"
+      ],
+      "request_count": 1,
+      "sql_attempts": 1,
+      "rejected_requests": 0,
+      "unhelpful_sql": 0
+    },
+    {
+      "id": "D02",
+      "category": "single",
+      "account": "demo-hq",
+      "dataset": "olist",
+      "dataset_id": "3a062a9d-7610-4c19-8ab9-d5cecf80ac91",
+      "question": "2018年1月 SP 已送达订单数",
+      "effective_query": {
+        "dataset_id": "3a062a9d-7610-4c19-8ab9-d5cecf80ac91",
+        "month": "2018-01",
+        "baseline_month": null,
+        "metric": "delivered_count",
+        "state": "SP",
+        "group_by": "none",
+        "city": null,
+        "intent": "single",
+        "ranking": "late_count",
+        "condition_sources": {}
+      },
+      "expected": {
+        "status": "answered",
+        "paths": [
+          [
+            "overall"
+          ]
+        ]
+      },
+      "status": "answered",
+      "answer": "圣保罗州，2018-01，已送达订单数。2018-01 为 2,975 单。",
+      "pending_fields": [],
+      "analysis_id": "6d986da4-a9ef-47d7-8363-839991890dcd",
+      "trace": [
+        {
+          "sequence": 1,
+          "tool": "compare_delivery",
+          "parameters": {
+            "month": "2018-01",
+            "baseline_month": null,
+            "state": "SP",
+            "metric": "delivered_count",
+            "group_by": "none"
+          },
+          "status": "ok",
+          "duration_ms": 3.34,
+          "evidence_id": "0e0febd4-b6eb-40bc-9702-0747f7fc03af"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "0e0febd4-b6eb-40bc-9702-0747f7fc03af",
+          "result_sha256": "625a700aa282dd1f741192e20086b8c26060b3e48c89d41cedc9a22eb6953120",
+          "result": {
+            "dataset_id": "3a062a9d-7610-4c19-8ab9-d5cecf80ac91",
+            "month": "2018-01",
+            "baseline_month": null,
+            "metric": "delivered_count",
+            "group_by": "none",
+            "state": "SP",
+            "metric_version": "1"
+          },
+          "row_count": 1,
+          "sample_rows": [
+            {
+              "region": null,
+              "current": {
+                "value": 2975,
+                "sample_count": 2975,
+                "numerator": null
+              },
+              "baseline": null,
+              "delta": null,
+              "delta_pp": null,
+              "late_count_delta": null
+            }
+          ]
+        }
+      ],
+      "duration_ms": 9.6,
+      "model_requests": [],
+      "passed": true,
+      "failures": [],
+      "path": [
+        "overall"
+      ],
+      "request_count": 1,
+      "sql_attempts": 1,
+      "rejected_requests": 0,
+      "unhelpful_sql": 0
+    },
+    {
+      "id": "D03",
+      "category": "single",
+      "account": "demo-hq",
+      "dataset": "olist",
+      "dataset_id": "3a062a9d-7610-4c19-8ab9-d5cecf80ac91",
+      "question": "2018年6月平均送达耗时是多少？",
+      "effective_query": {
+        "dataset_id": "3a062a9d-7610-4c19-8ab9-d5cecf80ac91",
+        "month": "2018-06",
+        "baseline_month": null,
+        "metric": "avg_delivery_days",
+        "state": null,
+        "group_by": "none",
+        "city": null,
+        "intent": "single",
+        "ranking": "late_count",
+        "condition_sources": {}
+      },
+      "expected": {
+        "status": "answered",
+        "paths": [
+          [
+            "overall"
+          ]
+        ]
+      },
+      "status": "answered",
+      "answer": "全部地区，2018-06，平均送达耗时。2018-06 为 9.24 天（6,096 个有效样本）。",
+      "pending_fields": [],
+      "analysis_id": "61660744-6d05-4016-96a1-24b051372419",
+      "trace": [
+        {
+          "sequence": 1,
+          "tool": "compare_delivery",
+          "parameters": {
+            "month": "2018-06",
+            "baseline_month": null,
+            "state": null,
+            "metric": "avg_delivery_days",
+            "group_by": "none"
+          },
+          "status": "ok",
+          "duration_ms": 4.22,
+          "evidence_id": "4ff4bba6-4eaf-4254-ba6b-aec1e66e1757"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "4ff4bba6-4eaf-4254-ba6b-aec1e66e1757",
+          "result_sha256": "9dc4b3638c688d68f88c5d4eff47f44b35d27c1c222d8b674704fda336b89fef",
+          "result": {
+            "dataset_id": "3a062a9d-7610-4c19-8ab9-d5cecf80ac91",
+            "month": "2018-06",
+            "baseline_month": null,
+            "metric": "avg_delivery_days",
+            "group_by": "none",
+            "state": null,
+            "metric_version": "1"
+          },
+          "row_count": 1,
+          "sample_rows": [
+            {
+              "region": null,
+              "current": {
+                "value": "9.2392162931673471",
+                "sample_count": 6096,
+                "numerator": null
+              },
+              "baseline": null,
+              "delta": null,
+              "delta_pp": null,
+              "late_count_delta": null
+            }
+          ]
+        }
+      ],
+      "duration_ms": 10.43,
+      "model_requests": [],
+      "passed": true,
+      "failures": [],
+      "path": [
+        "overall"
+      ],
+      "request_count": 1,
+      "sql_attempts": 1,
+      "rejected_requests": 0,
+      "unhelpful_sql": 0
+    },
+    {
+      "id": "D04",
+      "category": "single",
+      "account": "demo-sp",
+      "dataset": "synthetic",
+      "dataset_id": "1bbfcd29-2c5a-43ba-96a7-54cbc9469ec2",
+      "question": "2018年10月本州配送阶段耗时是多少？",
+      "effective_query": {
+        "dataset_id": "1bbfcd29-2c5a-43ba-96a7-54cbc9469ec2",
+        "month": "2018-10",
+        "baseline_month": null,
+        "metric": "stages",
+        "state": "SP",
+        "group_by": "none",
+        "city": null,
+        "intent": "single",
+        "ranking": "late_count",
+        "condition_sources": {}
+      },
+      "expected": {
+        "status": "answered",
+        "paths": [
+          [
+            "stages"
+          ]
+        ]
+      },
+      "status": "answered",
+      "answer": "圣保罗州，2018-10，配送阶段耗时。2018-10 交接前中位数 1.00 天，交接后 5.00 天（12 个有效样本）。",
+      "pending_fields": [],
+      "analysis_id": "44cc5511-f788-48c9-a4fd-daf706fb752c",
+      "trace": [
+        {
+          "sequence": 1,
+          "tool": "compare_delivery_stages",
+          "parameters": {
+            "month": "2018-10",
+            "baseline_month": null,
+            "state": "SP"
+          },
+          "status": "ok",
+          "duration_ms": 1.98,
+          "evidence_id": "3e90c01c-71b6-4958-a2d5-8c1815dc9f2e"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "3e90c01c-71b6-4958-a2d5-8c1815dc9f2e",
+          "result_sha256": "6283e7937698e87fd12ad261dd3f1bae100baaefedf4a2d8a88bc8aa06c60448",
+          "result": {
+            "dataset_id": "1bbfcd29-2c5a-43ba-96a7-54cbc9469ec2",
+            "month": "2018-10",
+            "baseline_month": null,
+            "state": "SP",
+            "supported": true,
+            "current": {
+              "before_handoff": {
+                "p50_days": 1.0,
+                "p90_days": 1.0,
+                "sample_count": 12,
+                "excluded_count": 0
+              },
+              "after_handoff": {
+                "p50_days": 5.0,
+                "p90_days": 5.0,
+                "sample_count": 12,
+                "excluded_count": 0
+              }
+            },
+            "baseline": null,
+            "metric_version": "1"
+          },
+          "row_count": null,
+          "sample_rows": null
+        }
+      ],
+      "duration_ms": 8.51,
+      "model_requests": [],
+      "passed": true,
+      "failures": [],
+      "path": [
+        "stages"
+      ],
+      "request_count": 1,
+      "sql_attempts": 1,
+      "rejected_requests": 0,
+      "unhelpful_sql": 0
+    },
+    {
+      "id": "D05",
+      "category": "compare",
+      "account": "demo-hq",
+      "dataset": "olist",
+      "dataset_id": "3a062a9d-7610-4c19-8ab9-d5cecf80ac91",
+      "question": "2017年6月和7月超期率对比",
+      "effective_query": {
+        "dataset_id": "3a062a9d-7610-4c19-8ab9-d5cecf80ac91",
+        "month": "2017-07",
+        "baseline_month": "2017-06",
+        "metric": "late_rate",
+        "state": null,
+        "group_by": "none",
+        "city": null,
+        "intent": "compare",
+        "ranking": "late_count",
+        "condition_sources": {}
+      },
+      "expected": {
+        "status": "answered",
+        "paths": [
+          [
+            "overall"
+          ]
+        ]
+      },
+      "status": "answered",
+      "answer": "全部地区，2017-06 → 2017-07，送达超期率。2017-06 为 3.03%（95/3,135），2017-07 为 2.79%（108/3,872），变化 -0.24 个百分点。",
+      "pending_fields": [],
+      "analysis_id": "3de62d85-d5fc-43c5-9106-78f8505bd452",
+      "trace": [
+        {
+          "sequence": 1,
+          "tool": "compare_delivery",
+          "parameters": {
+            "month": "2017-07",
+            "baseline_month": "2017-06",
+            "state": null,
+            "metric": "late_rate",
+            "group_by": "none"
+          },
+          "status": "ok",
+          "duration_ms": 4.86,
+          "evidence_id": "4e334b33-b882-41de-a3f9-1e18c419c9a0"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "4e334b33-b882-41de-a3f9-1e18c419c9a0",
+          "result_sha256": "61024b88183c6e6515fe440ab760910cd8e0ea93ad1d55d7c0540791f82f3876",
+          "result": {
+            "dataset_id": "3a062a9d-7610-4c19-8ab9-d5cecf80ac91",
+            "month": "2017-07",
+            "baseline_month": "2017-06",
+            "metric": "late_rate",
+            "group_by": "none",
+            "state": null,
+            "metric_version": "1"
+          },
+          "row_count": 1,
+          "sample_rows": [
+            {
+              "region": null,
+              "current": {
+                "value": "0.02789256198347107438016528926",
+                "sample_count": 3872,
+                "numerator": 108
+              },
+              "baseline": {
+                "value": "0.03030303030303030303030303030",
+                "sample_count": 3135,
+                "numerator": 95
+              },
+              "delta": null,
+              "delta_pp": "-0.2410468319559228650137741040",
+              "late_count_delta": 13
+            }
+          ]
+        }
+      ],
+      "duration_ms": 11.15,
+      "model_requests": [],
+      "passed": true,
+      "failures": [],
+      "path": [
+        "overall"
+      ],
+      "request_count": 1,
+      "sql_attempts": 1,
+      "rejected_requests": 0,
+      "unhelpful_sql": 0
+    },
+    {
+      "id": "D06",
+      "category": "compare",
+      "account": "demo-hq",
+      "dataset": "olist",
+      "dataset_id": "3a062a9d-7610-4c19-8ab9-d5cecf80ac91",
+      "question": "2018年4月和5月签收单数对比",
+      "effective_query": {
+        "dataset_id": "3a062a9d-7610-4c19-8ab9-d5cecf80ac91",
+        "month": "2018-05",
+        "baseline_month": "2018-04",
+        "metric": "delivered_count",
+        "state": null,
+        "group_by": "none",
+        "city": null,
+        "intent": "compare",
+        "ranking": "late_count",
+        "condition_sources": {}
+      },
+      "expected": {
+        "status": "answered",
+        "paths": [
+          [
+            "overall"
+          ]
+        ]
+      },
+      "status": "answered",
+      "answer": "全部地区，2018-04 → 2018-05，已送达订单数。2018-04 为 6,798 单，2018-05 为 6,749 单，变化 -49 单。",
+      "pending_fields": [],
+      "analysis_id": "dd767f1f-d3a0-4f19-a6e8-5fdd1c6178b2",
+      "trace": [
+        {
+          "sequence": 1,
+          "tool": "compare_delivery",
+          "parameters": {
+            "month": "2018-05",
+            "baseline_month": "2018-04",
+            "state": null,
+            "metric": "delivered_count",
+            "group_by": "none"
+          },
+          "status": "ok",
+          "duration_ms": 5.71,
+          "evidence_id": "1f53c285-1936-4967-84b7-3ea6f7c85c9c"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "1f53c285-1936-4967-84b7-3ea6f7c85c9c",
+          "result_sha256": "391895f10bf5fa314564db71e29af3a066bce341ba332fc881e3ee2feef7dcbb",
+          "result": {
+            "dataset_id": "3a062a9d-7610-4c19-8ab9-d5cecf80ac91",
+            "month": "2018-05",
+            "baseline_month": "2018-04",
+            "metric": "delivered_count",
+            "group_by": "none",
+            "state": null,
+            "metric_version": "1"
+          },
+          "row_count": 1,
+          "sample_rows": [
+            {
+              "region": null,
+              "current": {
+                "value": 6749,
+                "sample_count": 6749,
+                "numerator": null
+              },
+              "baseline": {
+                "value": 6798,
+                "sample_count": 6798,
+                "numerator": null
+              },
+              "delta": -49,
+              "delta_pp": null,
+              "late_count_delta": null
+            }
+          ]
+        }
+      ],
+      "duration_ms": 35.71,
+      "model_requests": [],
+      "passed": true,
+      "failures": [],
+      "path": [
+        "overall"
+      ],
+      "request_count": 1,
+      "sql_attempts": 1,
+      "rejected_requests": 0,
+      "unhelpful_sql": 0
+    },
+    {
+      "id": "D07",
+      "category": "compare",
+      "account": "demo-hq",
+      "dataset": "olist",
+      "dataset_id": "3a062a9d-7610-4c19-8ab9-d5cecf80ac91",
+      "question": "2018年1月和2月 RJ 平均送达耗时变化",
+      "effective_query": {
+        "dataset_id": "3a062a9d-7610-4c19-8ab9-d5cecf80ac91",
+        "month": "2018-02",
+        "baseline_month": "2018-01",
+        "metric": "avg_delivery_days",
+        "state": "RJ",
+        "group_by": "none",
+        "city": null,
+        "intent": "compare",
+        "ranking": "late_count",
+        "condition_sources": {}
+      },
+      "expected": {
+        "status": "answered",
+        "paths": [
+          [
+            "overall"
+          ]
+        ]
+      },
+      "status": "answered",
+      "answer": "里约热内卢州，2018-01 → 2018-02，平均送达耗时。2018-01 为 18.36 天（850 个有效样本），2018-02 为 23.82 天（879 个有效样本），变化 +5.46 天。",
+      "pending_fields": [],
+      "analysis_id": "95c64ed7-c432-4fa0-9f26-d5a83f908114",
+      "trace": [
+        {
+          "sequence": 1,
+          "tool": "compare_delivery",
+          "parameters": {
+            "month": "2018-02",
+            "baseline_month": "2018-01",
+            "state": "RJ",
+            "metric": "avg_delivery_days",
+            "group_by": "none"
+          },
+          "status": "ok",
+          "duration_ms": 5.64,
+          "evidence_id": "7e84cf2e-de6f-4b52-9a16-7bcece61c3aa"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "7e84cf2e-de6f-4b52-9a16-7bcece61c3aa",
+          "result_sha256": "1d75178b3f1765a82ee6b6416039486a9ebe937855071be0c6d99ebe67cfa8e1",
+          "result": {
+            "dataset_id": "3a062a9d-7610-4c19-8ab9-d5cecf80ac91",
+            "month": "2018-02",
+            "baseline_month": "2018-01",
+            "metric": "avg_delivery_days",
+            "group_by": "none",
+            "state": "RJ",
+            "metric_version": "1"
+          },
+          "row_count": 1,
+          "sample_rows": [
+            {
+              "region": null,
+              "current": {
+                "value": "23.8177621086672566",
+                "sample_count": 879,
+                "numerator": null
+              },
+              "baseline": {
+                "value": "18.3616440359477124",
+                "sample_count": 850,
+                "numerator": null
+              },
+              "delta": "5.4561180727195442",
+              "delta_pp": null,
+              "late_count_delta": null
+            }
+          ]
+        }
+      ],
+      "duration_ms": 11.98,
+      "model_requests": [],
+      "passed": true,
+      "failures": [],
+      "path": [
+        "overall"
+      ],
+      "request_count": 1,
+      "sql_attempts": 1,
+      "rejected_requests": 0,
+      "unhelpful_sql": 0
+    },
+    {
+      "id": "D08",
+      "category": "compare",
+      "account": "demo-hq",
+      "dataset": "olist",
+      "dataset_id": "3a062a9d-7610-4c19-8ab9-d5cecf80ac91",
+      "question": "2018年6月和7月配送阶段耗时对比",
+      "effective_query": {
+        "dataset_id": "3a062a9d-7610-4c19-8ab9-d5cecf80ac91",
+        "month": "2018-07",
+        "baseline_month": "2018-06",
+        "metric": "stages",
+        "state": null,
+        "group_by": "none",
+        "city": null,
+        "intent": "compare",
+        "ranking": "late_count",
+        "condition_sources": {}
+      },
+      "expected": {
+        "status": "answered",
+        "paths": [
+          [
+            "stages"
+          ]
+        ]
+      },
+      "status": "answered",
+      "answer": "全部地区，2018-06 → 2018-07，配送阶段耗时。2018-06 交接前中位数 1.78 天，交接后 5.78 天（6,050 个有效样本）。2018-07 交接前中位数 1.80 天，交接后 5.30 天（6,119 个有效样本）。",
+      "pending_fields": [],
+      "analysis_id": "59a74093-c4df-4fef-b98c-81fc748cf81a",
+      "trace": [
+        {
+          "sequence": 1,
+          "tool": "compare_delivery_stages",
+          "parameters": {
+            "month": "2018-07",
+            "baseline_month": "2018-06",
+            "state": null
+          },
+          "status": "ok",
+          "duration_ms": 20.14,
+          "evidence_id": "429d006f-64c8-472b-96fd-886027fd41ee"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "429d006f-64c8-472b-96fd-886027fd41ee",
+          "result_sha256": "2e1a12acde7b4980b171b91a08f5f5f1434f98a22b7db9f7f1a3f0974f088c8a",
+          "result": {
+            "dataset_id": "3a062a9d-7610-4c19-8ab9-d5cecf80ac91",
+            "month": "2018-07",
+            "baseline_month": "2018-06",
+            "state": null,
+            "supported": true,
+            "current": {
+              "before_handoff": {
+                "p50_days": 1.801261574074074,
+                "p90_days": 6.168215277777778,
+                "sample_count": 6119,
+                "excluded_count": 37
+              },
+              "after_handoff": {
+                "p50_days": 5.298877314814815,
+                "p90_days": 11.083849537037036,
+                "sample_count": 6119,
+                "excluded_count": 37
+              }
+            },
+            "baseline": {
+              "before_handoff": {
+                "p50_days": 1.775306712962963,
+                "p90_days": 5.251981481481483,
+                "sample_count": 6050,
+                "excluded_count": 46
+              },
+              "after_handoff": {
+                "p50_days": 5.780237268518519,
+                "p90_days": 12.337363425925925,
+                "sample_count": 6050,
+                "excluded_count": 46
+              }
+            },
+            "metric_version": "1"
+          },
+          "row_count": null,
+          "sample_rows": null
+        }
+      ],
+      "duration_ms": 52.43,
+      "model_requests": [],
+      "passed": true,
+      "failures": [],
+      "path": [
+        "stages"
+      ],
+      "request_count": 1,
+      "sql_attempts": 1,
+      "rejected_requests": 0,
+      "unhelpful_sql": 0
+    },
+    {
+      "id": "D09",
+      "category": "investigate",
+      "account": "demo-hq",
+      "dataset": "synthetic",
+      "dataset_id": "1bbfcd29-2c5a-43ba-96a7-54cbc9469ec2",
+      "question": "2018年7月和8月超期率，排查新增超期集中在哪些地区，再查重点州的城市贡献",
+      "effective_query": {
+        "dataset_id": "1bbfcd29-2c5a-43ba-96a7-54cbc9469ec2",
+        "month": "2018-08",
+        "baseline_month": "2018-07",
+        "metric": "late_rate",
+        "state": null,
+        "group_by": "none",
+        "city": null,
+        "intent": "investigate",
+        "ranking": "late_count",
+        "condition_sources": {}
+      },
+      "expected": {
+        "status": "answered",
+        "paths": [
+          [
+            "overall",
+            "states",
+            "cities:SP"
+          ]
+        ]
+      },
+      "status": "answered",
+      "answer": "全部地区，2018-07 → 2018-08，送达超期率。2018-07 为 8.33%（2/24），2018-08 为 33.33%（8/24），变化 +25.00 个百分点。圣保罗州的新增超期 6 单，在当前查询的已知地区中居首。圣保罗州占已知州正增量的 100.0%。sao paulo的新增超期 5 单，在当前查询的已知地区中居首。",
+      "pending_fields": [],
+      "analysis_id": "67577002-d2b2-4c35-aff5-25a8496602c4",
+      "trace": [
+        {
+          "sequence": 1,
+          "tool": "compare_delivery",
+          "parameters": {
+            "month": "2018-08",
+            "baseline_month": "2018-07",
+            "state": null,
+            "metric": "late_rate",
+            "group_by": "none"
+          },
+          "status": "ok",
+          "duration_ms": 2.51,
+          "evidence_id": "4e56c38e-e2d3-485a-ac6f-cab61f0e9c19"
+        },
+        {
+          "sequence": 2,
+          "tool": "compare_delivery",
+          "parameters": {
+            "month": "2018-08",
+            "baseline_month": "2018-07",
+            "state": null,
+            "metric": "late_rate",
+            "group_by": "state"
+          },
+          "status": "ok",
+          "duration_ms": 1.41,
+          "evidence_id": "e5dadcc6-e36e-43a0-bbeb-a43d6899da8a"
+        },
+        {
+          "sequence": 3,
+          "tool": "compare_delivery",
+          "parameters": {
+            "month": "2018-08",
+            "baseline_month": "2018-07",
+            "state": "SP",
+            "metric": "late_rate",
+            "group_by": "city"
+          },
+          "status": "ok",
+          "duration_ms": 1.45,
+          "evidence_id": "5b8e3c0c-60bf-45d0-abde-8a0775e9b6f0"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "4e56c38e-e2d3-485a-ac6f-cab61f0e9c19",
+          "result_sha256": "7f1faf19e2b29d3e5cf19d1ce3538b70d958907e7669c3930bf6b4be857593d2",
+          "result": {
+            "dataset_id": "1bbfcd29-2c5a-43ba-96a7-54cbc9469ec2",
+            "month": "2018-08",
+            "baseline_month": "2018-07",
+            "metric": "late_rate",
+            "group_by": "none",
+            "state": null,
+            "metric_version": "1"
+          },
+          "row_count": 1,
+          "sample_rows": [
+            {
+              "region": null,
+              "current": {
+                "value": "0.3333333333333333333333333333",
+                "sample_count": 24,
+                "numerator": 8
+              },
+              "baseline": {
+                "value": "0.08333333333333333333333333333",
+                "sample_count": 24,
+                "numerator": 2
+              },
+              "delta": null,
+              "delta_pp": "25.00000000000000000000000000",
+              "late_count_delta": 6
+            }
+          ]
+        },
+        {
+          "id": "e5dadcc6-e36e-43a0-bbeb-a43d6899da8a",
+          "result_sha256": "03b1c45fc1e9727eeb47b53b66206950933acd6ef5025ae94a46b945674952c1",
+          "result": {
+            "dataset_id": "1bbfcd29-2c5a-43ba-96a7-54cbc9469ec2",
+            "month": "2018-08",
+            "baseline_month": "2018-07",
+            "metric": "late_rate",
+            "group_by": "state",
+            "state": null,
+            "metric_version": "1"
+          },
+          "row_count": 2,
+          "sample_rows": [
+            {
+              "region": "RJ",
+              "current": {
+                "value": "0.08333333333333333333333333333",
+                "sample_count": 12,
+                "numerator": 1
+              },
+              "baseline": {
+                "value": "0.08333333333333333333333333333",
+                "sample_count": 12,
+                "numerator": 1
+              },
+              "delta": null,
+              "delta_pp": "0E-29",
+              "late_count_delta": 0
+            }
+          ]
+        },
+        {
+          "id": "5b8e3c0c-60bf-45d0-abde-8a0775e9b6f0",
+          "result_sha256": "1eda0e2ab077f363d340fa3b8e5825a5e64c96a5c8e2101ae1b5b844f7d7a99d",
+          "result": {
+            "dataset_id": "1bbfcd29-2c5a-43ba-96a7-54cbc9469ec2",
+            "month": "2018-08",
+            "baseline_month": "2018-07",
+            "metric": "late_rate",
+            "group_by": "city",
+            "state": "SP",
+            "metric_version": "1"
+          },
+          "row_count": 2,
+          "sample_rows": [
+            {
+              "region": "campinas",
+              "current": {
+                "value": "0.1666666666666666666666666667",
+                "sample_count": 6,
+                "numerator": 1
+              },
+              "baseline": {
+                "value": "0",
+                "sample_count": 6,
+                "numerator": 0
+              },
+              "delta": null,
+              "delta_pp": "16.66666666666666666666666667",
+              "late_count_delta": 1
+            }
+          ]
+        }
+      ],
+      "duration_ms": 27.64,
+      "model_requests": [],
+      "passed": true,
+      "failures": [],
+      "path": [
+        "overall",
+        "states",
+        "cities:SP"
+      ],
+      "request_count": 3,
+      "sql_attempts": 3,
+      "rejected_requests": 0,
+      "unhelpful_sql": 0
+    },
+    {
+      "id": "D10",
+      "category": "investigate",
+      "account": "demo-hq",
+      "dataset": "synthetic",
+      "dataset_id": "1bbfcd29-2c5a-43ba-96a7-54cbc9469ec2",
+      "question": "2018年9月和10月超期率异常，排查各州有没有普遍上升，再核对交接两段",
+      "effective_query": {
+        "dataset_id": "1bbfcd29-2c5a-43ba-96a7-54cbc9469ec2",
+        "month": "2018-10",
+        "baseline_month": "2018-09",
+        "metric": "late_rate",
+        "state": null,
+        "group_by": "state",
+        "city": null,
+        "intent": "investigate",
+        "ranking": "late_count",
+        "condition_sources": {}
+      },
+      "expected": {
+        "status": "answered",
+        "paths": [
+          [
+            "overall",
+            "states",
+            "stages"
+          ]
+        ]
+      },
+      "status": "answered",
+      "answer": "全部地区，2018-09 → 2018-10，送达超期率。2018-09 为 33.33%（8/24），2018-10 为 58.33%（14/24），变化 +25.00 个百分点。里约热内卢州的新增超期 3 单，在当前查询的已知地区中居首。里约热内卢州占已知州正增量的 50.0%。全部地区阶段证据显示交接前中位耗时 1.00 → 1.00 天，交接后 2.00 → 5.00 天。归因到承运商需补充标识和轨迹。",
+      "pending_fields": [],
+      "analysis_id": "1f99b96f-60ee-4638-9393-826f83cb109d",
+      "trace": [
+        {
+          "sequence": 1,
+          "tool": "compare_delivery",
+          "parameters": {
+            "month": "2018-10",
+            "baseline_month": "2018-09",
+            "state": null,
+            "metric": "late_rate",
+            "group_by": "none"
+          },
+          "status": "ok",
+          "duration_ms": 1.89,
+          "evidence_id": "cb879efe-f35e-44b5-b055-50d3bcac1669"
+        },
+        {
+          "sequence": 2,
+          "tool": "compare_delivery",
+          "parameters": {
+            "month": "2018-10",
+            "baseline_month": "2018-09",
+            "state": null,
+            "metric": "late_rate",
+            "group_by": "state"
+          },
+          "status": "ok",
+          "duration_ms": 1.17,
+          "evidence_id": "186ef4b3-de02-4acf-ae59-ef53ec2930c7"
+        },
+        {
+          "sequence": 3,
+          "tool": "compare_delivery_stages",
+          "parameters": {
+            "month": "2018-10",
+            "baseline_month": "2018-09",
+            "state": null
+          },
+          "status": "ok",
+          "duration_ms": 1.38,
+          "evidence_id": "c817445f-ba8e-471e-abcc-2eab2fc3d54a"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "cb879efe-f35e-44b5-b055-50d3bcac1669",
+          "result_sha256": "11c4c7eaf5f47c646407042eb4b0351e7a446ab3b361042fd8009f4fbcd63263",
+          "result": {
+            "dataset_id": "1bbfcd29-2c5a-43ba-96a7-54cbc9469ec2",
+            "month": "2018-10",
+            "baseline_month": "2018-09",
+            "metric": "late_rate",
+            "group_by": "none",
+            "state": null,
+            "metric_version": "1"
+          },
+          "row_count": 1,
+          "sample_rows": [
+            {
+              "region": null,
+              "current": {
+                "value": "0.5833333333333333333333333333",
+                "sample_count": 24,
+                "numerator": 14
+              },
+              "baseline": {
+                "value": "0.3333333333333333333333333333",
+                "sample_count": 24,
+                "numerator": 8
+              },
+              "delta": null,
+              "delta_pp": "25.00000000000000000000000000",
+              "late_count_delta": 6
+            }
+          ]
+        },
+        {
+          "id": "186ef4b3-de02-4acf-ae59-ef53ec2930c7",
+          "result_sha256": "a8dc8bf9af597ac5deb617ad7ac41f5dcefae60bb1fe6321a4edeba2dfd5d91a",
+          "result": {
+            "dataset_id": "1bbfcd29-2c5a-43ba-96a7-54cbc9469ec2",
+            "month": "2018-10",
+            "baseline_month": "2018-09",
+            "metric": "late_rate",
+            "group_by": "state",
+            "state": null,
+            "metric_version": "1"
+          },
+          "row_count": 2,
+          "sample_rows": [
+            {
+              "region": "RJ",
+              "current": {
+                "value": "0.3333333333333333333333333333",
+                "sample_count": 12,
+                "numerator": 4
+              },
+              "baseline": {
+                "value": "0.08333333333333333333333333333",
+                "sample_count": 12,
+                "numerator": 1
+              },
+              "delta": null,
+              "delta_pp": "25.00000000000000000000000000",
+              "late_count_delta": 3
+            }
+          ]
+        },
+        {
+          "id": "c817445f-ba8e-471e-abcc-2eab2fc3d54a",
+          "result_sha256": "1131765416c1a1be3a7b39c66ec24050098baaba9b61abb32d7b78ce5679a939",
+          "result": {
+            "dataset_id": "1bbfcd29-2c5a-43ba-96a7-54cbc9469ec2",
+            "month": "2018-10",
+            "baseline_month": "2018-09",
+            "state": null,
+            "supported": true,
+            "current": {
+              "before_handoff": {
+                "p50_days": 1.0,
+                "p90_days": 1.0,
+                "sample_count": 24,
+                "excluded_count": 0
+              },
+              "after_handoff": {
+                "p50_days": 5.0,
+                "p90_days": 5.0,
+                "sample_count": 24,
+                "excluded_count": 0
+              }
+            },
+            "baseline": {
+              "before_handoff": {
+                "p50_days": 1.0,
+                "p90_days": 1.0,
+                "sample_count": 24,
+                "excluded_count": 0
+              },
+              "after_handoff": {
+                "p50_days": 2.0,
+                "p90_days": 5.0,
+                "sample_count": 24,
+                "excluded_count": 0
+              }
+            },
+            "metric_version": "1"
+          },
+          "row_count": null,
+          "sample_rows": null
+        }
+      ],
+      "duration_ms": 28.79,
+      "model_requests": [],
+      "passed": true,
+      "failures": [],
+      "path": [
+        "overall",
+        "states",
+        "stages"
+      ],
+      "request_count": 3,
+      "sql_attempts": 3,
+      "rejected_requests": 0,
+      "unhelpful_sql": 0
+    },
+    {
+      "id": "D11",
+      "category": "investigate",
+      "account": "demo-hq",
+      "dataset": "olist",
+      "dataset_id": "3a062a9d-7610-4c19-8ab9-d5cecf80ac91",
+      "question": "2017年2月和3月超期率，排查是否有明显异常。变化较小时可以停止",
+      "effective_query": {
+        "dataset_id": "3a062a9d-7610-4c19-8ab9-d5cecf80ac91",
+        "month": "2017-03",
+        "baseline_month": "2017-02",
+        "metric": "late_rate",
+        "state": null,
+        "group_by": "none",
+        "city": null,
+        "intent": "investigate",
+        "ranking": "late_count",
+        "condition_sources": {}
+      },
+      "expected": {
+        "status": "answered",
+        "paths": [
+          [
+            "overall"
+          ]
+        ]
+      },
+      "status": "answered",
+      "answer": "全部地区，2017-02 → 2017-03，送达超期率。2017-02 为 2.96%（49/1,653），2017-03 为 4.56%（116/2,546），变化 +1.59 个百分点。超期率升幅低于 2 个百分点，规则调查在整体查询后结束。",
+      "pending_fields": [],
+      "analysis_id": "0bcb3e2a-2f64-46d3-b5a3-b6a91a6c336f",
+      "trace": [
+        {
+          "sequence": 1,
+          "tool": "compare_delivery",
+          "parameters": {
+            "month": "2017-03",
+            "baseline_month": "2017-02",
+            "state": null,
+            "metric": "late_rate",
+            "group_by": "none"
+          },
+          "status": "ok",
+          "duration_ms": 5.33,
+          "evidence_id": "8694b2d5-672c-46b8-bbbc-ac4a1389bf89"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "8694b2d5-672c-46b8-bbbc-ac4a1389bf89",
+          "result_sha256": "53b7eb608a1298303627288fe9e7974ecb281ef760eddd7f680e4c6543f69286",
+          "result": {
+            "dataset_id": "3a062a9d-7610-4c19-8ab9-d5cecf80ac91",
+            "month": "2017-03",
+            "baseline_month": "2017-02",
+            "metric": "late_rate",
+            "group_by": "none",
+            "state": null,
+            "metric_version": "1"
+          },
+          "row_count": 1,
+          "sample_rows": [
+            {
+              "region": null,
+              "current": {
+                "value": "0.04556166535742340926944226237",
+                "sample_count": 2546,
+                "numerator": 116
+              },
+              "baseline": {
+                "value": "0.02964307320024198427102238355",
+                "sample_count": 1653,
+                "numerator": 49
+              },
+              "delta": null,
+              "delta_pp": "1.591859215718142499841987882",
+              "late_count_delta": 67
+            }
+          ]
+        }
+      ],
+      "duration_ms": 32.73,
+      "model_requests": [],
+      "passed": true,
+      "failures": [],
+      "path": [
+        "overall"
+      ],
+      "request_count": 1,
+      "sql_attempts": 1,
+      "rejected_requests": 0,
+      "unhelpful_sql": 0
+    },
+    {
+      "id": "D12",
+      "category": "investigate",
+      "account": "demo-hq",
+      "dataset": "olist",
+      "dataset_id": "3a062a9d-7610-4c19-8ab9-d5cecf80ac91",
+      "question": "2018年4月和5月超期率变差，排查地区分布及扩散情况下的耗时变化",
+      "effective_query": {
+        "dataset_id": "3a062a9d-7610-4c19-8ab9-d5cecf80ac91",
+        "month": "2018-05",
+        "baseline_month": "2018-04",
+        "metric": "late_rate",
+        "state": null,
+        "group_by": "none",
+        "city": null,
+        "intent": "investigate",
+        "ranking": "late_count",
+        "condition_sources": {}
+      },
+      "expected": {
+        "status": "answered",
+        "paths": [
+          [
+            "overall",
+            "states",
+            "stages"
+          ]
+        ]
+      },
+      "status": "answered",
+      "answer": "全部地区，2018-04 → 2018-05，送达超期率。2018-04 为 4.50%（306/6,798），2018-05 为 6.56%（443/6,749），变化 +2.06 个百分点。圣保罗州的新增超期 85 单，在当前查询的已知地区中居首。圣保罗州占已知州正增量的 42.1%。全部地区阶段证据显示交接前中位耗时 2.06 → 1.81 天，交接后 6.91 → 6.51 天。归因到承运商需补充标识和轨迹。",
+      "pending_fields": [],
+      "analysis_id": "739c30a6-e5ae-4079-a0a1-f8750e6b44c3",
+      "trace": [
+        {
+          "sequence": 1,
+          "tool": "compare_delivery",
+          "parameters": {
+            "month": "2018-05",
+            "baseline_month": "2018-04",
+            "state": null,
+            "metric": "late_rate",
+            "group_by": "none"
+          },
+          "status": "ok",
+          "duration_ms": 6.63,
+          "evidence_id": "862aa513-abcd-4209-8524-dadb6cd5716d"
+        },
+        {
+          "sequence": 2,
+          "tool": "compare_delivery",
+          "parameters": {
+            "month": "2018-05",
+            "baseline_month": "2018-04",
+            "state": null,
+            "metric": "late_rate",
+            "group_by": "state"
+          },
+          "status": "ok",
+          "duration_ms": 5.61,
+          "evidence_id": "8c21e83b-0ba2-4965-b599-a5ef6483eabe"
+        },
+        {
+          "sequence": 3,
+          "tool": "compare_delivery_stages",
+          "parameters": {
+            "month": "2018-05",
+            "baseline_month": "2018-04",
+            "state": null
+          },
+          "status": "ok",
+          "duration_ms": 16.32,
+          "evidence_id": "a4a922be-4f8c-4131-a1b0-6feb30711144"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "862aa513-abcd-4209-8524-dadb6cd5716d",
+          "result_sha256": "80ad9b658421a53030e6812c121749598291f341b7fbcf39f4203dabc1ed8cfd",
+          "result": {
+            "dataset_id": "3a062a9d-7610-4c19-8ab9-d5cecf80ac91",
+            "month": "2018-05",
+            "baseline_month": "2018-04",
+            "metric": "late_rate",
+            "group_by": "none",
+            "state": null,
+            "metric_version": "1"
+          },
+          "row_count": 1,
+          "sample_rows": [
+            {
+              "region": null,
+              "current": {
+                "value": "0.06563935397836716550600088902",
+                "sample_count": 6749,
+                "numerator": 443
+              },
+              "baseline": {
+                "value": "0.04501323918799646954986760812",
+                "sample_count": 6798,
+                "numerator": 306
+              },
+              "delta": null,
+              "delta_pp": "2.062611479037069595613328090",
+              "late_count_delta": 137
+            }
+          ]
+        },
+        {
+          "id": "8c21e83b-0ba2-4965-b599-a5ef6483eabe",
+          "result_sha256": "1d4383dfabc2d9586eb197508223592952230bd3b6a3b45f137115431acd43c2",
+          "result": {
+            "dataset_id": "3a062a9d-7610-4c19-8ab9-d5cecf80ac91",
+            "month": "2018-05",
+            "baseline_month": "2018-04",
+            "metric": "late_rate",
+            "group_by": "state",
+            "state": null,
+            "metric_version": "1"
+          },
+          "row_count": 27,
+          "sample_rows": [
+            {
+              "region": "AC",
+              "current": {
+                "value": "0",
+                "sample_count": 2,
+                "numerator": 0
+              },
+              "baseline": {
+                "value": "0.25",
+                "sample_count": 4,
+                "numerator": 1
+              },
+              "delta": null,
+              "delta_pp": "-25.00",
+              "late_count_delta": -1
+            }
+          ]
+        },
+        {
+          "id": "a4a922be-4f8c-4131-a1b0-6feb30711144",
+          "result_sha256": "ce10aef98b48aa6e6c8b19b4b6b058c070bec7f49f2f2fc5d958a37c62e9b3a8",
+          "result": {
+            "dataset_id": "3a062a9d-7610-4c19-8ab9-d5cecf80ac91",
+            "month": "2018-05",
+            "baseline_month": "2018-04",
+            "state": null,
+            "supported": true,
+            "current": {
+              "before_handoff": {
+                "p50_days": 1.8124652777777779,
+                "p90_days": 5.773571759259259,
+                "sample_count": 6719,
+                "excluded_count": 30
+              },
+              "after_handoff": {
+                "p50_days": 6.511875,
+                "p90_days": 18.306662037037036,
+                "sample_count": 6719,
+                "excluded_count": 30
+              }
+            },
+            "baseline": {
+              "before_handoff": {
+                "p50_days": 2.0625925925925928,
+                "p90_days": 5.632361111111111,
+                "sample_count": 6791,
+                "excluded_count": 7
+              },
+              "after_handoff": {
+                "p50_days": 6.9115162037037035,
+                "p90_days": 18.130625,
+                "sample_count": 6791,
+                "excluded_count": 7
+              }
+            },
+            "metric_version": "1"
+          },
+          "row_count": null,
+          "sample_rows": null
+        }
+      ],
+      "duration_ms": 35.68,
+      "model_requests": [],
+      "passed": true,
+      "failures": [],
+      "path": [
+        "overall",
+        "states",
+        "stages"
+      ],
+      "request_count": 3,
+      "sql_attempts": 3,
+      "rejected_requests": 0,
+      "unhelpful_sql": 0
+    },
+    {
+      "id": "D13",
+      "category": "investigate",
+      "account": "demo-hq",
+      "dataset": "olist",
+      "dataset_id": "3a062a9d-7610-4c19-8ab9-d5cecf80ac91",
+      "question": "2016年12月和2017年1月超期率调查。先确认两期样本够不够",
+      "effective_query": {
+        "dataset_id": "3a062a9d-7610-4c19-8ab9-d5cecf80ac91",
+        "month": "2017-01",
+        "baseline_month": "2016-12",
+        "metric": "late_rate",
+        "state": null,
+        "group_by": "none",
+        "city": null,
+        "intent": "investigate",
+        "ranking": "late_count",
+        "condition_sources": {}
+      },
+      "expected": {
+        "status": "partial",
+        "paths": [
+          [
+            "overall"
+          ]
+        ]
+      },
+      "status": "partial",
+      "answer": "全部地区，2016-12 → 2017-01，送达超期率。2016-12 为 0.00%（0/1），2017-01 为 2.93%（22/750），变化 +2.93 个百分点。已保留可核实的证据，部分周期或调查步骤缺少可用结果。每期至少需要 5 个有效样本来继续规则调查。",
+      "pending_fields": [],
+      "analysis_id": "ad0196b9-69c3-48b8-af86-0170f0afcca6",
+      "trace": [
+        {
+          "sequence": 1,
+          "tool": "compare_delivery",
+          "parameters": {
+            "month": "2017-01",
+            "baseline_month": "2016-12",
+            "state": null,
+            "metric": "late_rate",
+            "group_by": "none"
+          },
+          "status": "ok",
+          "duration_ms": 3.18,
+          "evidence_id": "a6ed47db-05aa-4287-9d08-e90455d8c5b4"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "a6ed47db-05aa-4287-9d08-e90455d8c5b4",
+          "result_sha256": "b3e19b7c5a857178397ef5b91d270e68d4e7ea72c2eee5519b626656db6116b1",
+          "result": {
+            "dataset_id": "3a062a9d-7610-4c19-8ab9-d5cecf80ac91",
+            "month": "2017-01",
+            "baseline_month": "2016-12",
+            "metric": "late_rate",
+            "group_by": "none",
+            "state": null,
+            "metric_version": "1"
+          },
+          "row_count": 1,
+          "sample_rows": [
+            {
+              "region": null,
+              "current": {
+                "value": "0.02933333333333333333333333333",
+                "sample_count": 750,
+                "numerator": 22
+              },
+              "baseline": {
+                "value": "0",
+                "sample_count": 1,
+                "numerator": 0
+              },
+              "delta": null,
+              "delta_pp": "2.933333333333333333333333333",
+              "late_count_delta": 22
+            }
+          ]
+        }
+      ],
+      "duration_ms": 20.05,
+      "model_requests": [],
+      "passed": true,
+      "failures": [],
+      "path": [
+        "overall"
+      ],
+      "request_count": 1,
+      "sql_attempts": 1,
+      "rejected_requests": 0,
+      "unhelpful_sql": 0
+    },
+    {
+      "id": "D14",
+      "category": "investigate",
+      "account": "demo-hq",
+      "dataset": "olist",
+      "dataset_id": "3a062a9d-7610-4c19-8ab9-d5cecf80ac91",
+      "question": "2017年8月和9月 RJ 超期率变差，请定位优先去查的城市",
+      "effective_query": {
+        "dataset_id": "3a062a9d-7610-4c19-8ab9-d5cecf80ac91",
+        "month": "2017-09",
+        "baseline_month": "2017-08",
+        "metric": "late_rate",
+        "state": "RJ",
+        "group_by": "none",
+        "city": null,
+        "intent": "investigate",
+        "ranking": "late_count",
+        "condition_sources": {}
+      },
+      "expected": {
+        "status": "answered",
+        "paths": [
+          [
+            "overall",
+            "cities:RJ"
+          ]
+        ]
+      },
+      "status": "answered",
+      "answer": "里约热内卢州，2017-08 → 2017-09，送达超期率。2017-08 为 2.98%（16/537），2017-09 为 5.08%（30/591），变化 +2.10 个百分点。rio de janeiro的新增超期 7 单，在当前查询的已知地区中居首。",
+      "pending_fields": [],
+      "analysis_id": "42acd1a9-46d3-4e1f-83c9-6adadb672469",
+      "trace": [
+        {
+          "sequence": 1,
+          "tool": "compare_delivery",
+          "parameters": {
+            "month": "2017-09",
+            "baseline_month": "2017-08",
+            "state": "RJ",
+            "metric": "late_rate",
+            "group_by": "none"
+          },
+          "status": "ok",
+          "duration_ms": 8.48,
+          "evidence_id": "4c746e2b-0ccc-4161-bf3b-7857acef8a16"
+        },
+        {
+          "sequence": 2,
+          "tool": "compare_delivery",
+          "parameters": {
+            "month": "2017-09",
+            "baseline_month": "2017-08",
+            "state": "RJ",
+            "metric": "late_rate",
+            "group_by": "city"
+          },
+          "status": "ok",
+          "duration_ms": 6.13,
+          "evidence_id": "adc01871-8b69-4afb-8752-9e005130210a"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "4c746e2b-0ccc-4161-bf3b-7857acef8a16",
+          "result_sha256": "b6f4c6542614752a36651802dc7d631bcd2b38017134522ad73dc84d617850e2",
+          "result": {
+            "dataset_id": "3a062a9d-7610-4c19-8ab9-d5cecf80ac91",
+            "month": "2017-09",
+            "baseline_month": "2017-08",
+            "metric": "late_rate",
+            "group_by": "none",
+            "state": "RJ",
+            "metric_version": "1"
+          },
+          "row_count": 1,
+          "sample_rows": [
+            {
+              "region": null,
+              "current": {
+                "value": "0.05076142131979695431472081218",
+                "sample_count": 591,
+                "numerator": 30
+              },
+              "baseline": {
+                "value": "0.02979515828677839851024208566",
+                "sample_count": 537,
+                "numerator": 16
+              },
+              "delta": null,
+              "delta_pp": "2.096626303301855580447872652",
+              "late_count_delta": 14
+            }
+          ]
+        },
+        {
+          "id": "adc01871-8b69-4afb-8752-9e005130210a",
+          "result_sha256": "79070ba52ed18f89c36706c7be1ac7c374ace591ef68369700a2a0f1dd2b54f6",
+          "result": {
+            "dataset_id": "3a062a9d-7610-4c19-8ab9-d5cecf80ac91",
+            "month": "2017-09",
+            "baseline_month": "2017-08",
+            "metric": "late_rate",
+            "group_by": "city",
+            "state": "RJ",
+            "metric_version": "1"
+          },
+          "row_count": 88,
+          "sample_rows": [
+            {
+              "region": "angra dos reis",
+              "current": {
+                "value": "0",
+                "sample_count": 5,
+                "numerator": 0
+              },
+              "baseline": {
+                "value": "0",
+                "sample_count": 3,
+                "numerator": 0
+              },
+              "delta": null,
+              "delta_pp": "0",
+              "late_count_delta": 0
+            }
+          ]
+        }
+      ],
+      "duration_ms": 47.71,
+      "model_requests": [],
+      "passed": true,
+      "failures": [],
+      "path": [
+        "overall",
+        "cities:RJ"
+      ],
+      "request_count": 2,
+      "sql_attempts": 2,
+      "rejected_requests": 0,
+      "unhelpful_sql": 0
+    },
+    {
+      "id": "D15",
+      "category": "investigate",
+      "account": "demo-sp",
+      "dataset": "olist",
+      "dataset_id": "3a062a9d-7610-4c19-8ab9-d5cecf80ac91",
+      "question": "2018年6月和7月本州超期率上升，调查哪个阶段变化更值得看",
+      "effective_query": {
+        "dataset_id": "3a062a9d-7610-4c19-8ab9-d5cecf80ac91",
+        "month": "2018-07",
+        "baseline_month": "2018-06",
+        "metric": "late_rate",
+        "state": "SP",
+        "group_by": "none",
+        "city": null,
+        "intent": "investigate",
+        "ranking": "late_count",
+        "condition_sources": {}
+      },
+      "expected": {
+        "status": "answered",
+        "paths": [
+          [
+            "overall",
+            "stages"
+          ]
+        ]
+      },
+      "status": "answered",
+      "answer": "圣保罗州，2018-06 → 2018-07，送达超期率。2018-06 为 0.73%（20/2,735），2018-07 为 3.69%（100/2,712），变化 +2.96 个百分点。圣保罗州阶段证据显示交接前中位耗时 1.75 → 1.75 天，交接后 3.30 → 3.26 天。归因到承运商需补充标识和轨迹。",
+      "pending_fields": [],
+      "analysis_id": "11efcca9-15ff-449b-84c0-4a39425ca33b",
+      "trace": [
+        {
+          "sequence": 1,
+          "tool": "compare_delivery",
+          "parameters": {
+            "month": "2018-07",
+            "baseline_month": "2018-06",
+            "state": "SP",
+            "metric": "late_rate",
+            "group_by": "none"
+          },
+          "status": "ok",
+          "duration_ms": 9.13,
+          "evidence_id": "c862fc75-a752-4fa7-ab7c-02df64a7966b"
+        },
+        {
+          "sequence": 2,
+          "tool": "compare_delivery_stages",
+          "parameters": {
+            "month": "2018-07",
+            "baseline_month": "2018-06",
+            "state": "SP"
+          },
+          "status": "ok",
+          "duration_ms": 17.93,
+          "evidence_id": "8832bbb4-da77-4792-a571-29a5cba60793"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "c862fc75-a752-4fa7-ab7c-02df64a7966b",
+          "result_sha256": "7aa47ee571bc67275c807f81882b083f0aed385383a5007c82a174ab31f4d817",
+          "result": {
+            "dataset_id": "3a062a9d-7610-4c19-8ab9-d5cecf80ac91",
+            "month": "2018-07",
+            "baseline_month": "2018-06",
+            "metric": "late_rate",
+            "group_by": "none",
+            "state": "SP",
+            "metric_version": "1"
+          },
+          "row_count": 1,
+          "sample_rows": [
+            {
+              "region": null,
+              "current": {
+                "value": "0.03687315634218289085545722714",
+                "sample_count": 2712,
+                "numerator": 100
+              },
+              "baseline": {
+                "value": "0.007312614259597806215722120658",
+                "sample_count": 2735,
+                "numerator": 20
+              },
+              "delta": null,
+              "delta_pp": "2.956054208258508463973510648",
+              "late_count_delta": 80
+            }
+          ]
+        },
+        {
+          "id": "8832bbb4-da77-4792-a571-29a5cba60793",
+          "result_sha256": "da7b893d9727da9142aaa2f552342c49ef15efc0303476ea0beeac14743a7d93",
+          "result": {
+            "dataset_id": "3a062a9d-7610-4c19-8ab9-d5cecf80ac91",
+            "month": "2018-07",
+            "baseline_month": "2018-06",
+            "state": "SP",
+            "supported": true,
+            "current": {
+              "before_handoff": {
+                "p50_days": 1.749837962962963,
+                "p90_days": 5.8398310185185185,
+                "sample_count": 2699,
+                "excluded_count": 13
+              },
+              "after_handoff": {
+                "p50_days": 3.2644675925925926,
+                "p90_days": 7.133699074074077,
+                "sample_count": 2699,
+                "excluded_count": 13
+              }
+            },
+            "baseline": {
+              "before_handoff": {
+                "p50_days": 1.7477314814814815,
+                "p90_days": 5.141520833333332,
+                "sample_count": 2725,
+                "excluded_count": 10
+              },
+              "after_handoff": {
+                "p50_days": 3.304664351851852,
+                "p90_days": 7.288113425925926,
+                "sample_count": 2725,
+                "excluded_count": 10
+              }
+            },
+            "metric_version": "1"
+          },
+          "row_count": null,
+          "sample_rows": null
+        }
+      ],
+      "duration_ms": 51.29,
+      "model_requests": [],
+      "passed": true,
+      "failures": [],
+      "path": [
+        "overall",
+        "stages"
+      ],
+      "request_count": 2,
+      "sql_attempts": 2,
+      "rejected_requests": 0,
+      "unhelpful_sql": 0
+    },
+    {
+      "id": "D16",
+      "category": "investigate",
+      "account": "demo-hq",
+      "dataset": "olist",
+      "dataset_id": "3a062a9d-7610-4c19-8ab9-d5cecf80ac91",
+      "question": "2017年11月和2018年1月超期率变化，排查是否明显变差，改善就停",
+      "effective_query": {
+        "dataset_id": "3a062a9d-7610-4c19-8ab9-d5cecf80ac91",
+        "month": "2018-01",
+        "baseline_month": "2017-11",
+        "metric": "late_rate",
+        "state": null,
+        "group_by": "none",
+        "city": null,
+        "intent": "investigate",
+        "ranking": "late_count",
+        "condition_sources": {}
+      },
+      "expected": {
+        "status": "answered",
+        "paths": [
+          [
+            "overall"
+          ]
+        ]
+      },
+      "status": "answered",
+      "answer": "全部地区，2017-11 → 2018-01，送达超期率。2017-11 为 12.40%（904/7,288），2018-01 为 5.70%（403/7,069），变化 -6.70 个百分点。超期率升幅低于 2 个百分点，规则调查在整体查询后结束。",
+      "pending_fields": [],
+      "analysis_id": "c0830106-e9da-4e2e-aaf3-a89eabae8a71",
+      "trace": [
+        {
+          "sequence": 1,
+          "tool": "compare_delivery",
+          "parameters": {
+            "month": "2018-01",
+            "baseline_month": "2017-11",
+            "state": null,
+            "metric": "late_rate",
+            "group_by": "none"
+          },
+          "status": "ok",
+          "duration_ms": 6.62,
+          "evidence_id": "4c858fce-6868-4056-b906-3b620414b4d5"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "4c858fce-6868-4056-b906-3b620414b4d5",
+          "result_sha256": "f5ed47c807ba46a7ffcc64c3793b5a9c7e7b11dcaf41173a7c1820423a6627aa",
+          "result": {
+            "dataset_id": "3a062a9d-7610-4c19-8ab9-d5cecf80ac91",
+            "month": "2018-01",
+            "baseline_month": "2017-11",
+            "metric": "late_rate",
+            "group_by": "none",
+            "state": null,
+            "metric_version": "1"
+          },
+          "row_count": 1,
+          "sample_rows": [
+            {
+              "region": null,
+              "current": {
+                "value": "0.05700947800254632904229735465",
+                "sample_count": 7069,
+                "numerator": 403
+              },
+              "baseline": {
+                "value": "0.1240395170142700329308452250",
+                "sample_count": 7288,
+                "numerator": 904
+              },
+              "delta": null,
+              "delta_pp": "-6.703003901172370388854787035",
+              "late_count_delta": -501
+            }
+          ]
+        }
+      ],
+      "duration_ms": 25.93,
+      "model_requests": [],
+      "passed": true,
+      "failures": [],
+      "path": [
+        "overall"
+      ],
+      "request_count": 1,
+      "sql_attempts": 1,
+      "rejected_requests": 0,
+      "unhelpful_sql": 0
+    },
+    {
+      "id": "D17",
+      "category": "boundary",
+      "account": "demo-hq",
+      "dataset": "olist",
+      "dataset_id": "3a062a9d-7610-4c19-8ab9-d5cecf80ac91",
+      "question": "7月超期率是多少？",
+      "effective_query": null,
+      "expected": {
+        "status": "needs_clarification",
+        "paths": [
+          []
+        ]
+      },
+      "status": "needs_clarification",
+      "answer": "请补充年份。",
+      "pending_fields": [
+        "year"
+      ],
+      "analysis_id": "a2f388a1-8f6c-41f7-a0f0-9c0cd83a3b71",
+      "trace": [],
+      "evidence": [],
+      "duration_ms": 25.69,
+      "model_requests": [],
+      "passed": true,
+      "failures": [],
+      "path": [],
+      "request_count": 0,
+      "sql_attempts": 0,
+      "rejected_requests": 0,
+      "unhelpful_sql": 0
+    },
+    {
+      "id": "D18",
+      "category": "boundary",
+      "account": "demo-hq",
+      "dataset": "olist",
+      "dataset_id": "3a062a9d-7610-4c19-8ab9-d5cecf80ac91",
+      "question": "2018年7月和8月对比一下。",
+      "effective_query": null,
+      "expected": {
+        "status": "needs_clarification",
+        "paths": [
+          []
+        ]
+      },
+      "status": "needs_clarification",
+      "answer": "请补充履约指标。",
+      "pending_fields": [
+        "metric"
+      ],
+      "analysis_id": "9dfae97c-12fd-4846-bc6b-259ab9d2b6aa",
+      "trace": [],
+      "evidence": [],
+      "duration_ms": 8.69,
+      "model_requests": [],
+      "passed": true,
+      "failures": [],
+      "path": [],
+      "request_count": 0,
+      "sql_attempts": 0,
+      "rejected_requests": 0,
+      "unhelpful_sql": 0
+    },
+    {
+      "id": "D19",
+      "category": "boundary",
+      "account": "demo-sp",
+      "dataset": "olist",
+      "dataset_id": "3a062a9d-7610-4c19-8ab9-d5cecf80ac91",
+      "question": "2018年6月 MG 超期率是多少？",
+      "effective_query": null,
+      "expected": {
+        "status": "scope_denied",
+        "paths": [
+          []
+        ]
+      },
+      "status": "scope_denied",
+      "answer": "当前账号可查范围为圣保罗州。请在此范围内提问。",
+      "pending_fields": [],
+      "analysis_id": "5eb6b996-2744-474f-a9f8-b20ea9843b62",
+      "trace": [],
+      "evidence": [],
+      "duration_ms": 19.18,
+      "model_requests": [],
+      "passed": true,
+      "failures": [],
+      "path": [],
+      "request_count": 0,
+      "sql_attempts": 0,
+      "rejected_requests": 0,
+      "unhelpful_sql": 0
+    },
+    {
+      "id": "D20",
+      "category": "boundary",
+      "account": "demo-hq",
+      "dataset": "olist",
+      "dataset_id": "3a062a9d-7610-4c19-8ab9-d5cecf80ac91",
+      "question": "2018年9月配送阶段耗时是多少？",
+      "effective_query": {
+        "dataset_id": "3a062a9d-7610-4c19-8ab9-d5cecf80ac91",
+        "month": "2018-09",
+        "baseline_month": null,
+        "metric": "stages",
+        "state": null,
+        "group_by": "none",
+        "city": null,
+        "intent": "single",
+        "ranking": "late_count",
+        "condition_sources": {}
+      },
+      "expected": {
+        "status": "no_data",
+        "paths": [
+          [
+            "stages"
+          ]
+        ]
+      },
+      "status": "no_data",
+      "answer": "全部地区，2018-09，配送阶段耗时。所查月份没有可计算样本。",
+      "pending_fields": [],
+      "analysis_id": "d8e60a30-6576-461c-be08-50fe8a1ef5dd",
+      "trace": [
+        {
+          "sequence": 1,
+          "tool": "compare_delivery_stages",
+          "parameters": {
+            "month": "2018-09",
+            "baseline_month": null,
+            "state": null
+          },
+          "status": "ok",
+          "duration_ms": 2.08,
+          "evidence_id": "a9dcd97c-2c78-48c0-9f9e-a7c9685d1e6c"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "a9dcd97c-2c78-48c0-9f9e-a7c9685d1e6c",
+          "result_sha256": "63d59ef4eee7ccd511bf25f49e32fcb5e083dcb700ec578efb57aec18f479358",
+          "result": {
+            "dataset_id": "3a062a9d-7610-4c19-8ab9-d5cecf80ac91",
+            "month": "2018-09",
+            "baseline_month": null,
+            "state": null,
+            "supported": true,
+            "current": {
+              "before_handoff": {
+                "p50_days": null,
+                "p90_days": null,
+                "sample_count": 0,
+                "excluded_count": 0
+              },
+              "after_handoff": {
+                "p50_days": null,
+                "p90_days": null,
+                "sample_count": 0,
+                "excluded_count": 0
+              }
+            },
+            "baseline": null,
+            "metric_version": "1"
+          },
+          "row_count": null,
+          "sample_rows": null
+        }
+      ],
+      "duration_ms": 9.8,
+      "model_requests": [],
+      "passed": true,
+      "failures": [],
+      "path": [
+        "stages"
+      ],
+      "request_count": 1,
+      "sql_attempts": 1,
+      "rejected_requests": 0,
+      "unhelpful_sql": 0
+    }
+  ]
+}

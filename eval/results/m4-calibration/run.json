@@ -1,0 +1,75 @@
+{
+  "started_at_utc": "2026-11-23T09:47:39.379743+00:00",
+  "command": "calibrate",
+  "dataset_ids": {
+    "olist": "3a062a9d-7610-4c19-8ab9-d5cecf80ac91",
+    "synthetic": "1bbfcd29-2c5a-43ba-96a7-54cbc9469ec2"
+  },
+  "postgres_version": 180006,
+  "freeze_sha256": "7a87ef71017954e639b041f3e3663bd7edc2a4aa13abc496a4f7627ca815f573",
+  "configuration": {
+    "metric_version": "1",
+    "tool_budget": 3,
+    "sql": {
+      "connect_timeout": 5,
+      "statement_timeout": 5000
+    },
+    "model": {
+      "base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+      "name": "qwen3.8-flash",
+      "timeout": 45,
+      "reasoning_effort": "low"
+    },
+    "datasets": {
+      "olist": {
+        "orders_sha256": "8df58ef3d2d7e9944010f7beecd9b75367f5588ec6e3c91cec19ae3345ef9ecf",
+        "customers_sha256": "983a422239e1712ded753b3bf9ecf47dc73f144d306029dcfa99e70a226883d2",
+        "order_count": 99441
+      },
+      "synthetic": {
+        "orders_sha256": "33311d21c50b6270b737ca70c2042a5d59cba5cda7aa4b210d4ece8150258037",
+        "customers_sha256": "b5423f812a77c84300572f45a9cc01345481bd54436e795bc347468788c27a1b",
+        "order_count": 96
+      }
+    },
+    "thresholds": {
+      "min_change_pp": "2",
+      "min_samples": 5,
+      "concentration": "0.60"
+    },
+    "sha256": {
+      "cases/development.jsonl": "a6b978700667d60860b2781fa5e02ba09fc26eae5358e2ee911416eb586aba5e",
+      "cases/holdout.jsonl": "e25d6b869857c9517db12bbfeb835f60203a5464e8a1fedbb42ec4e74ff10e4c",
+      "reference_sql/delivery.sql": "e806bfd85592719d28e0fb7cf098884a55bef9df06b2b5bff7d938bfa137be42",
+      "reference_sql/stages.sql": "42d2543f3b00c15b1b8615ad14a4d54f41cc371d415c1904c00131d1c75259ea",
+      "../backend/scripts/evaluate.py": "9df75173be06807c02cc4c1314f6cd4930318ea11d1f7efaf8429142bc218c9b",
+      "../backend/scripts/evaluation/reference.py": "e36115ab86c10c2367cc247462aa48c4c2eac2de75dd5474382c7b9590c5667b",
+      "../backend/scripts/evaluation/scoring.py": "727504eed933ef9b763a96b538c4128c413440d65e03ebf64f1bf7290644c847"
+    }
+  },
+  "implementation_sha256": {
+    "backend/app/__init__.py": "a50bdaca376dbe244aa4e4b4302eb525d150f0e532603753ab9163080d869b17",
+    "backend/app/analysis.py": "a88a57ee8a55bbc53de39dbd0df4c1a3a375ebc75d83ef7581c169cab15ec595",
+    "backend/app/answers.py": "716e6128cba7efcb720b18fd70b0935aa87295c57cba62b328d193178853fe5d",
+    "backend/app/auth.py": "b4e92c3415c65c4dcc230fb57041e99f3d0a1665cfd1a19b0bf0c555ad479935",
+    "backend/app/conditions.py": "de71e6efe893832610b93fcc6fe8bfc00132d87b016ddbd6ae7fb6314e35b665",
+    "backend/app/database.py": "ffdbbd879dbb95e54cee42df450bc554040e9cf79ee75bf0f1086236ac7c4ea4",
+    "backend/app/import_data.py": "19210f174943e737bb5b5aa0c982a3ac726a21e3a2eb6b43f1812a8cdec5455a",
+    "backend/app/investigations.py": "4aea6e2879691b6acaf2f90360919303dd3737a82e6d6d1382bf5376275dd53d",
+    "backend/app/main.py": "a1ba1cce7df6191ae1fe6428ba76e3a7d778694da5cd661981fdf43d3f9c7dbc",
+    "backend/app/migrate.py": "d08de4169df4e4ffe858cbc8cc38795616f7b4fe72abb71358cc34b81198e18c",
+    "backend/app/model.py": "bdd4cb58c5c227683aae9435060937a5ad96b539881c11e27069653667e67dd9",
+    "backend/app/queries.py": "6b725784286d7b567d548042618ca3db470b9342114dedbadbc478cdd92524d0",
+    "backend/app/schemas.py": "4c2496ed372f774a00e7820ccdabcac0922d96b755276ac7c7aef6749020a750",
+    "backend/app/tools/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "backend/app/tools/delivery.py": "acfc103b6033f5468cb371988a7e3f1206548e64187cb160e6121d647cda025a",
+    "backend/scripts/__init__.py": "49f8ba21ddad05c8013ab0b69a6bd2049f7f6a9f72bfbb80a3ec247f8bc1ca8e",
+    "backend/scripts/bootstrap_demo.py": "0d417bf8aee408fe7f440ef11fe4a1d940d2663d4eb3e7eda437d720cadd4835",
+    "backend/scripts/evaluate.py": "9df75173be06807c02cc4c1314f6cd4930318ea11d1f7efaf8429142bc218c9b",
+    "backend/scripts/evaluation/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "backend/scripts/evaluation/reference.py": "e36115ab86c10c2367cc247462aa48c4c2eac2de75dd5474382c7b9590c5667b",
+    "backend/scripts/evaluation/scoring.py": "727504eed933ef9b763a96b538c4128c413440d65e03ebf64f1bf7290644c847",
+    "backend/scripts/import_olist.py": "51acc232d3543aebd484af123f80060ac52c73d2bb1dc4bcb66ee053e57eeca1",
+    "backend/scripts/seed_demo.py": "729e6bb823aaf85e41a936e217c9ca78f120d19bb0a327a61ddb9091ed965d56"
+  }
+}

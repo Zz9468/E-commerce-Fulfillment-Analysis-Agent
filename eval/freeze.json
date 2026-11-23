@@ -1,0 +1,40 @@
+{
+  "metric_version": "1",
+  "tool_budget": 3,
+  "sql": {
+    "connect_timeout": 5,
+    "statement_timeout": 5000
+  },
+  "model": {
+    "base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+    "name": "qwen3.8-flash",
+    "timeout": 45,
+    "reasoning_effort": "low"
+  },
+  "datasets": {
+    "olist": {
+      "orders_sha256": "8df58ef3d2d7e9944010f7beecd9b75367f5588ec6e3c91cec19ae3345ef9ecf",
+      "customers_sha256": "983a422239e1712ded753b3bf9ecf47dc73f144d306029dcfa99e70a226883d2",
+      "order_count": 99441
+    },
+    "synthetic": {
+      "orders_sha256": "33311d21c50b6270b737ca70c2042a5d59cba5cda7aa4b210d4ece8150258037",
+      "customers_sha256": "b5423f812a77c84300572f45a9cc01345481bd54436e795bc347468788c27a1b",
+      "order_count": 96
+    }
+  },
+  "thresholds": {
+    "min_change_pp": "2",
+    "min_samples": 5,
+    "concentration": "0.60"
+  },
+  "sha256": {
+    "cases/development.jsonl": "a6b978700667d60860b2781fa5e02ba09fc26eae5358e2ee911416eb586aba5e",
+    "cases/holdout.jsonl": "e25d6b869857c9517db12bbfeb835f60203a5464e8a1fedbb42ec4e74ff10e4c",
+    "reference_sql/delivery.sql": "e806bfd85592719d28e0fb7cf098884a55bef9df06b2b5bff7d938bfa137be42",
+    "reference_sql/stages.sql": "42d2543f3b00c15b1b8615ad14a4d54f41cc371d415c1904c00131d1c75259ea",
+    "../backend/scripts/evaluate.py": "9df75173be06807c02cc4c1314f6cd4930318ea11d1f7efaf8429142bc218c9b",
+    "../backend/scripts/evaluation/reference.py": "e36115ab86c10c2367cc247462aa48c4c2eac2de75dd5474382c7b9590c5667b",
+    "../backend/scripts/evaluation/scoring.py": "727504eed933ef9b763a96b538c4128c413440d65e03ebf64f1bf7290644c847"
+  }
+}

@@ -16,6 +16,8 @@ from app.conditions import (
     resolve_question,
 )
 from app.investigations import (
+    RULE_THRESHOLDS,
+    RuleThresholds,
     evidence_highlight,
     model_investigation,
     rule_investigation,
@@ -46,6 +48,7 @@ class ToolRun:
         self.analysis_id: UUID = uuid4()
         self.trace: list[TraceStep] = []
         self.evidence: list[Evidence] = []
+        self.overflow_requests = 0
         self._seen: set[tuple[str, str]] = set()
         self.restrict_to: EffectiveQuery | None = None
 
@@ -55,6 +58,7 @@ class ToolRun:
 
     def execute(self, tool: str, raw_args: object) -> ToolReply:
         if not self.remaining:
+            self.overflow_requests += 1
             return ToolReply(status="budget_exhausted")
         start = perf_counter()
         parameters = None
@@ -246,16 +250,29 @@ def _analyze(
             condition_sources=sources,
         )
 
+    question = request.question if not isinstance(request, DrilldownRequest) else ""
+    return analyze_resolved(run, query, question, model)
+
+
+def analyze_resolved(
+    run: ToolRun,
+    query: EffectiveQuery,
+    question: str,
+    model: Model | None = None,
+    *,
+    thresholds: RuleThresholds = RULE_THRESHOLDS,
+) -> AnalysisResponse:
+    if query.dataset_id != run.session.dataset_id:
+        raise ValueError("Resolved query dataset does not match the session")
+    account = run.session.account
+    if not account.allows(query.state) or (account.state and query.state is None):
+        return _scope_denied(run)
     note = ""
-    if (
-        query.intent == "investigate"
-        and not query.city
-        and not isinstance(request, DrilldownRequest)
-    ):
+    if query.intent == "investigate" and not query.city:
         if model:
-            status, note = model_investigation(run, query, request.question, model)
+            status, note = model_investigation(run, query, question, model)
         else:
-            status, note = rule_investigation(run, query, request.question)
+            status, note = rule_investigation(run, query, question, thresholds)
     else:
         reply = run.query(query)
         status = _status_for(reply, query)
@@ -267,7 +284,8 @@ def _analyze(
         ):
             note = evidence_highlight(reply.evidence, query.ranking)
     return AnalysisResponse(
-        **base,
+        session_id=run.session.session_id,
+        analysis_id=run.analysis_id,
         status=status,
         answer=answer_for(query, run.evidence, status, note),
         effective_query=query,

@@ -20,3 +20,6 @@ node_modules/
 
 # Olist 原始数据
 /data/olist/
+
+# 本地对照评测运行
+/eval/local/

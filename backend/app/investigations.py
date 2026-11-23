@@ -1,5 +1,5 @@
 import logging
-from dataclasses import replace
+from dataclasses import dataclass, replace
 from decimal import Decimal
 from typing import TYPE_CHECKING
 
@@ -20,16 +20,23 @@ if TYPE_CHECKING:
     from app.analysis import ToolRun
 
 logger = logging.getLogger(__name__)
-MIN_LATE_RATE_CHANGE_PP = Decimal("2")
-MIN_SAMPLES_PER_PERIOD = 5
-STATE_CONCENTRATION = Decimal("0.60")
 
 
-def _eligible(row: DeliveryRow) -> bool:
+@dataclass(frozen=True)
+class RuleThresholds:
+    min_change_pp: Decimal = Decimal("2")
+    min_samples: int = 5
+    concentration: Decimal = Decimal("0.60")
+
+
+RULE_THRESHOLDS = RuleThresholds()
+
+
+def _eligible(row: DeliveryRow, thresholds: RuleThresholds = RULE_THRESHOLDS) -> bool:
     return bool(
         row.baseline
         and min(row.baseline.sample_count, row.current.sample_count)
-        >= MIN_SAMPLES_PER_PERIOD
+        >= thresholds.min_samples
     )
 
 
@@ -75,7 +82,10 @@ def evidence_highlight(item: Evidence, ranking: Ranking) -> str:
 
 
 def rule_investigation(
-    run: "ToolRun", query: EffectiveQuery, question: str
+    run: "ToolRun",
+    query: EffectiveQuery,
+    question: str,
+    thresholds: RuleThresholds = RULE_THRESHOLDS,
 ) -> tuple[AnalysisStatus, str]:
     overall = run.query(query.model_copy(update={"group_by": GroupBy.NONE}))
     if not overall.evidence:
@@ -88,15 +98,15 @@ def rule_investigation(
     ):
         return "answered", "已完成所选指标的整体比较。"
     row = overall.evidence.result.rows[0]
-    if not _eligible(row):
+    if not _eligible(row, thresholds):
         return (
             "partial",
-            f"每期至少需要 {MIN_SAMPLES_PER_PERIOD} 个有效样本来继续规则调查。",
+            f"每期至少需要 {thresholds.min_samples} 个有效样本来继续规则调查。",
         )
-    if row.delta_pp is None or row.delta_pp < MIN_LATE_RATE_CHANGE_PP:
+    if row.delta_pp is None or row.delta_pp < thresholds.min_change_pp:
         return (
             "answered",
-            f"超期率升幅低于 {MIN_LATE_RATE_CHANGE_PP} 个百分点，规则调查在整体查询后结束。",
+            f"超期率升幅低于 {thresholds.min_change_pp} 个百分点，规则调查在整体查询后结束。",
         )
 
     prefer_stages = any(word in question for word in ("环节", "链路", "哪个阶段"))
@@ -127,7 +137,7 @@ def rule_investigation(
                 row.late_count_delta or 0 for row in positive
             )
             notes.append(f"{scope_name(top.region)}占已知州正增量的 {share:.1%}。")
-            if share >= STATE_CONCENTRATION and _eligible(top):
+            if share >= thresholds.concentration and _eligible(top, thresholds):
                 target = query.model_copy(
                     update={"group_by": GroupBy.CITY, "state": top.region}
                 )
@@ -209,7 +219,7 @@ def model_investigation(
     mild = (
         _eligible(row)
         and row.delta_pp is not None
-        and row.delta_pp < MIN_LATE_RATE_CHANGE_PP
+        and row.delta_pp < RULE_THRESHOLDS.min_change_pp
     )
     detail = any(
         result_status(item) == "answered"

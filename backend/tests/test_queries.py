@@ -209,7 +209,7 @@ def test_ac02_continuous_stage_percentiles_match_reference(
     with db.cursor(row_factory=dict_row) as cursor:
         reference = cursor.execute(
             (REFERENCE_SQL / "stages.sql").read_text(),
-            {"dataset_id": dataset, "months": [date(2018, 8, 1)]},
+            {"dataset_id": dataset, "months": [date(2018, 8, 1)], "state": "SP"},
         ).fetchone()
     assert (reference["before_p50"], reference["before_p90"]) == (
         Decimal(2),

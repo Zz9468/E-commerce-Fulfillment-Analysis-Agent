@@ -118,4 +118,15 @@ uv run --directory backend --locked --env-file ../.env pytest -q --olist-dir=../
 
 带 `--olist-dir` 的回归会将原始文件导入隔离测试库，对照系统查询、[独立参考 SQL](eval/reference_sql/) 和已知验收值，并检查规则调查能从整体比较追查到圣保罗市。样本数、阶段耗时与文件 SHA-256 见 [M1 验收记录](docs/里程碑.md#m1-把订单数据算对)。
 
+## 复跑 M4 对照评测
+
+按本地开发步骤启动数据库并运行 `scripts.bootstrap_demo`，再导入 Olist。开发集校准使用两个冻结数据版本，无需模型密钥。留出集使用 `freeze.json` 中的百炼模型配置，凭据从本地环境读取。每次运行指定一个新输出目录。
+
+```powershell
+uv run --directory backend --locked --env-file ../.env python -m scripts.evaluate calibrate --output ../eval/local/calibration
+uv run --directory backend --locked --env-file ../.env --env-file ../.env.model.local python -m scripts.evaluate holdout --output ../eval/local/holdout
+```
+
+题集、评分方法、逐题记录、实跑报告和工作台演示见 [M4 对照评测](eval/README.md)。
+
 开发文档见[项目索引](项目索引.md)。

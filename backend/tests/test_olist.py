@@ -46,6 +46,7 @@ def test_olist_matches_reference_sql(
         months=[july, august],
         month=august,
         baseline_month=july,
+        state=None,
     )
     with db.cursor(row_factory=dict_row) as cursor:
         delivery = cursor.execute(

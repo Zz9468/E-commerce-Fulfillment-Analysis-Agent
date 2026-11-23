@@ -4,6 +4,7 @@ WITH eligible AS (
            purchased_at, handed_to_carrier_at, delivered_at
     FROM order_fact
     WHERE dataset_id = %(dataset_id)s
+      AND (%(state)s::text IS NULL OR state_code = %(state)s)
       AND order_status = 'delivered'
       AND delivered_at IS NOT NULL
       AND estimated_delivery_date IS NOT NULL
