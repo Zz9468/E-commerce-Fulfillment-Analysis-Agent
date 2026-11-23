@@ -5,6 +5,7 @@ import httpx
 import pytest
 from fastapi.testclient import TestClient
 
+from app import queries
 from app.main import create_app
 from app.model import ChatModel, Decision, ToolCall
 from scripts.seed_demo import seed_demo
@@ -30,8 +31,10 @@ def ask(client, seeded, *, question=QUESTION, headers=HQ):
     return response.status_code, response.json()
 
 
-def test_rule_investigation_paths(migrated_database_url, seeded):
-    with TestClient(create_app(migrated_database_url, mode="rule")) as client:
+def test_rule_investigation_paths(query_database_urls, seeded):
+    with TestClient(
+        create_app(query_database_urls=query_database_urls, mode="rule")
+    ) as client:
         status, concentrated = ask(client, seeded)
         assert status == 200
         assert concentrated["status"] == "answered"
@@ -57,6 +60,97 @@ def test_rule_investigation_paths(migrated_database_url, seeded):
             "city",
         ]
         assert all(step["parameters"]["state"] == "SP" for step in local["trace"])
+
+
+def test_stage_sql_timeout_keeps_completed_evidence(
+    query_database_urls, seeded, monkeypatch
+):
+    compare_delivery_stages = queries.compare_delivery_stages
+
+    def delay_stages(connection, **params):
+        connection.execute("SELECT pg_sleep(2)")
+        return compare_delivery_stages(connection, **params)
+
+    monkeypatch.setenv("SQL_STATEMENT_TIMEOUT_MS", "200")
+    monkeypatch.setattr(queries, "compare_delivery_stages", delay_stages)
+    with TestClient(
+        create_app(query_database_urls=query_database_urls, mode="rule")
+    ) as client:
+        status, direct = ask(client, seeded, question="2018年8月配送阶段耗时")
+        assert status == 503 and direct["status"] == "unavailable"
+        assert [step["status"] for step in direct["trace"]] == ["failed"]
+        status, partial = ask(client, seeded, question="2018年9月和10月超期率变化原因")
+        assert status == 200 and partial["status"] == "partial"
+        assert [step["status"] for step in partial["trace"]] == ["ok", "ok", "failed"]
+        assert len(partial["evidence"]) == 2
+        drill = client.post(
+            "/api/analysis",
+            headers=HQ,
+            json={
+                "mode": "drilldown",
+                "session_id": partial["session_id"],
+                "source_evidence_id": partial["evidence"][1]["evidence_id"],
+                "state": "SP",
+            },
+        )
+        assert drill.status_code == 200 and drill.json()["status"] == "answered"
+
+
+@pytest.mark.parametrize("fault", ["timeout", "duplicate"])
+def test_model_failure_stops_with_available_evidence(
+    query_database_urls, seeded, fault
+):
+    calls = 0
+
+    def respond(request):
+        nonlocal calls
+        calls += 1
+        if fault == "timeout" and calls == 2:
+            assert request.extensions["timeout"]["read"] == 0.1
+            raise httpx.ReadTimeout("model timed out", request=request)
+        return httpx.Response(
+            200,
+            json={
+                "choices": [
+                    {
+                        "message": {
+                            "tool_calls": [
+                                {
+                                    "id": str(calls),
+                                    "function": {
+                                        "name": "compare_delivery",
+                                        "arguments": json.dumps(
+                                            {
+                                                "month": "2018-08",
+                                                "baseline_month": "2018-07",
+                                                "metric": "late_rate",
+                                            }
+                                        ),
+                                    },
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+        )
+
+    model = ChatModel(
+        "https://model.example/v1",
+        "test",
+        None,
+        timeout=0.1,
+        transport=httpx.MockTransport(respond),
+    )
+    with TestClient(
+        create_app(query_database_urls=query_database_urls, model=model)
+    ) as client:
+        status, partial = ask(client, seeded)
+    assert status == 200 and partial["status"] == "partial"
+    assert calls == 2 and len(partial["evidence"]) == 1
+    assert [step["status"] for step in partial["trace"]] == (
+        ["ok", "duplicate"] if fault == "duplicate" else ["ok"]
+    )
 
 
 class RejectedModel:
@@ -89,8 +183,10 @@ class RejectedModel:
         )
 
 
-def test_model_cannot_turn_rejections_into_evidence(migrated_database_url, seeded):
-    with TestClient(create_app(migrated_database_url, model=RejectedModel())) as client:
+def test_model_cannot_turn_rejections_into_evidence(query_database_urls, seeded):
+    with TestClient(
+        create_app(query_database_urls=query_database_urls, model=RejectedModel())
+    ) as client:
         http_status, result = ask(client, seeded, headers=SP)
     assert http_status == 503
     assert result["status"] == "unavailable"
@@ -99,7 +195,7 @@ def test_model_cannot_turn_rejections_into_evidence(migrated_database_url, seede
 
 
 def test_chat_protocol_replays_real_tool_results_by_call_id(
-    migrated_database_url, seeded
+    query_database_urls, seeded
 ):
     requests = []
 
@@ -164,7 +260,9 @@ def test_chat_protocol_replays_real_tool_results_by_call_id(
         reasoning_effort="low",
         transport=httpx.MockTransport(mock),
     )
-    with TestClient(create_app(migrated_database_url, model=adapter)) as client:
+    with TestClient(
+        create_app(query_database_urls=query_database_urls, model=adapter)
+    ) as client:
         _, result = ask(client, seeded)
     assert [entry["status"] for entry in result["trace"]] == ["ok", "ok", "ok"]
     assert result["status"] == "answered"
@@ -173,14 +271,16 @@ def test_chat_protocol_replays_real_tool_results_by_call_id(
     assert len(requests) == 4
 
 
-def test_live_model_tool_round_trip(pytestconfig, migrated_database_url, seeded):
+def test_live_model_tool_round_trip(pytestconfig, query_database_urls, seeded):
     if not pytestconfig.getoption("--live-model"):
         pytest.skip("Pass --live-model to call the configured model endpoint.")
     for name in ("MODEL_BASE_URL", "MODEL_NAME", "MODEL_API_KEY"):
         if not os.getenv(name):
             pytest.fail(f"Set {name} before running --live-model.")
 
-    with TestClient(create_app(migrated_database_url, mode="model")) as client:
+    with TestClient(
+        create_app(query_database_urls=query_database_urls, mode="model")
+    ) as client:
         assert client.get("/api/workspace", headers=HQ).json()["mode"] == "model"
         http_status, result = ask(client, seeded)
 
@@ -210,8 +310,10 @@ def test_live_model_tool_round_trip(pytestconfig, migrated_database_url, seeded)
     assert (row["current"]["numerator"], row["current"]["sample_count"]) == (8, 24)
 
 
-def test_fixed_replay_starts_from_actual_evidence(migrated_database_url, seeded):
-    with TestClient(create_app(migrated_database_url, mode="fixed")) as client:
+def test_fixed_replay_starts_from_actual_evidence(query_database_urls, seeded):
+    with TestClient(
+        create_app(query_database_urls=query_database_urls, mode="fixed")
+    ) as client:
         _, result = ask(client, seeded)
         assert result["status"] == "answered"
         assert [step["parameters"]["group_by"] for step in result["trace"]] == [

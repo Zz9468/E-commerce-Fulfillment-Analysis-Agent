@@ -1,9 +1,10 @@
+import logging
 import os
+from collections.abc import Mapping
 from datetime import datetime
 from typing import Annotated
-from uuid import UUID
+from uuid import UUID, uuid4
 
-import psycopg
 from fastapi import Depends, FastAPI, HTTPException, Response
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from psycopg import Connection, Error
@@ -11,10 +12,12 @@ from pydantic import BaseModel
 
 from app.analysis import analyze
 from app.auth import DEMO_ACCOUNTS, Account, SessionStore
+from app.database import configured_query_urls, connect_for_query
 from app.model import ChatModel, FixedModel, Model
 from app.schemas import AnalysisMode, AnalysisRequest, AnalysisResponse, QuestionRequest
 
 _bearer = HTTPBearer(auto_error=False)
+logger = logging.getLogger(__name__)
 
 
 def get_account(
@@ -45,9 +48,10 @@ class Workspace(BaseModel):
 
 
 def _datasets(connection: Connection, state: str | None) -> list[DatasetInfo]:
+    totals = "" if state else ", covered_months, order_count"
     records = connection.execute(
-        """
-        SELECT dataset_id, source, imported_at, covered_months, order_count, has_carrier_handoff
+        f"""
+        SELECT dataset_id, source, imported_at, has_carrier_handoff{totals}
         FROM dataset_version ORDER BY imported_at DESC, dataset_id
         """
     ).fetchall()
@@ -65,9 +69,9 @@ def _datasets(connection: Connection, state: str | None) -> list[DatasetInfo]:
             ).fetchall()
         }
     datasets = []
-    for dataset, source, imported, months, count, has_handoff in records:
+    for dataset, source, imported, has_handoff, *global_totals in records:
         visible_months, visible_count = (
-            scoped.get(dataset, ([], 0)) if state else (months, count)
+            scoped.get(dataset, ([], 0)) if state else global_totals
         )
         datasets.append(
             DatasetInfo(
@@ -83,13 +87,22 @@ def _datasets(connection: Connection, state: str | None) -> list[DatasetInfo]:
 
 
 def create_app(
-    database_url: str | None = None,
     *,
+    query_database_urls: Mapping[str, str] | None = None,
     mode: AnalysisMode | None = None,
     model: Model | None = None,
 ) -> FastAPI:
     app = FastAPI(title="电商履约分析 Agent")
     store = SessionStore()
+    query_urls = (
+        configured_query_urls()
+        if query_database_urls is None
+        else dict(query_database_urls)
+    )
+    connect_timeout = int(os.getenv("SQL_CONNECT_TIMEOUT_SECONDS", "5"))
+    statement_timeout = int(os.getenv("SQL_STATEMENT_TIMEOUT_MS", "5000"))
+    if min(connect_timeout, statement_timeout) <= 0:
+        raise ValueError("SQL timeouts must be positive")
     mode = mode or ("model" if model else os.getenv("ANALYSIS_MODE", "rule"))
     if mode == "fixed" and model is None:
         model = FixedModel()
@@ -104,16 +117,15 @@ def create_app(
     elif mode not in {"rule", "fixed", "model"}:
         raise ValueError("ANALYSIS_MODE must be rule, fixed or model")
 
-    def connect() -> Connection:
-        conninfo = database_url or os.getenv("DATABASE_URL")
-        if not conninfo:
-            raise HTTPException(503, "数据库尚未配置")
-        return psycopg.connect(conninfo, autocommit=True, connect_timeout=5)
-
     @app.get("/api/workspace")
     def workspace(account: Identity) -> Workspace:
         try:
-            with connect() as connection:
+            with connect_for_query(
+                query_urls.get(account.account_id),
+                account.account_id,
+                connect_timeout=connect_timeout,
+                statement_timeout=statement_timeout,
+            ) as connection:
                 datasets = _datasets(connection, account.state)
         except Error as exc:
             raise HTTPException(503, "数据库暂不可用") from exc
@@ -129,11 +141,17 @@ def create_app(
     def post_analysis(
         request: AnalysisRequest, account: Identity, response: Response
     ) -> AnalysisResponse:
+        session = None
         try:
             session = (
                 store.get(account, request.session_id) if request.session_id else None
             )
-            with connect() as connection:
+            with connect_for_query(
+                query_urls.get(account.account_id),
+                account.account_id,
+                connect_timeout=connect_timeout,
+                statement_timeout=statement_timeout,
+            ) as connection:
                 if isinstance(request, QuestionRequest):
                     if session is None:
                         if request.dataset_id:
@@ -155,7 +173,16 @@ def create_app(
         except LookupError as exc:
             raise HTTPException(404, "会话、证据或数据版本不可访问") from exc
         except Error as exc:
-            raise HTTPException(503, "数据库暂不可用") from exc
+            analysis_id = uuid4()
+            logger.warning(
+                "analysis_id=%s database_error=%s", analysis_id, type(exc).__name__
+            )
+            result = AnalysisResponse(
+                session_id=session.session_id if session else None,
+                analysis_id=analysis_id,
+                status="unavailable",
+                answer="数据库暂不可用，请稍后重试。",
+            )
         if result.status == "unavailable":
             response.status_code = 503
         return result

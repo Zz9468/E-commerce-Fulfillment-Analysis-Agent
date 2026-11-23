@@ -98,7 +98,7 @@ class ToolReply(BaseModel):
 
 
 class AnalysisResponse(BaseModel):
-    session_id: UUID
+    session_id: UUID | None
     analysis_id: UUID
     status: AnalysisStatus
     answer: str

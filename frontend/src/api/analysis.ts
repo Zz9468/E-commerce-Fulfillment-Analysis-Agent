@@ -101,7 +101,7 @@ export interface TraceStep {
 }
 
 export interface AnalysisResponse {
-  session_id: string
+  session_id: string | null
   analysis_id: string
   status:
     | 'answered'
@@ -126,28 +126,41 @@ export interface AnalysisResponse {
   pending_fields: string[]
 }
 
+const httpTimeoutSeconds = Number(import.meta.env.VITE_HTTP_TIMEOUT_SECONDS ?? 240)
+const httpTimeoutMs = httpTimeoutSeconds * 1000
+
 async function call<T>(
   path: string,
   token: AccountToken,
   signal: AbortSignal,
   request?: AnalysisRequest,
 ): Promise<T> {
-  const response = await fetch(path, {
-    method: request ? 'POST' : 'GET',
-    signal,
-    headers: {
-      Authorization: `Bearer ${token}`,
-      ...(request && { 'Content-Type': 'application/json' }),
-    },
-    body: request ? JSON.stringify(request) : undefined,
-  })
-  const body = await response.json().catch(() => null)
-  if (!response.ok && !(response.status === 503 && body?.status === 'unavailable')) {
-    throw new Error(
-      typeof body?.detail === 'string' ? body.detail : '暂时无法连接分析服务，请重试。',
-    )
+  const timeout = AbortSignal.timeout(httpTimeoutMs)
+  const requestSignal = AbortSignal.any([signal, timeout])
+  try {
+    const response = await fetch(path, {
+      method: request ? 'POST' : 'GET',
+      signal: requestSignal,
+      headers: {
+        Authorization: `Bearer ${token}`,
+        ...(request && { 'Content-Type': 'application/json' }),
+      },
+      body: request ? JSON.stringify(request) : undefined,
+    })
+    const body = await response.json().catch(() => null)
+    requestSignal.throwIfAborted()
+    if (response.status === 504) throw new Error('分析请求超时，请重试。')
+    if (!body || (!response.ok && !(response.status === 503 && body.status === 'unavailable'))) {
+      throw new Error(
+        typeof body?.detail === 'string' ? body.detail : '暂时无法连接分析服务，请重试。',
+      )
+    }
+    return body as T
+  } catch (failure) {
+    if (timeout.aborted && !signal.aborted) throw new Error('分析请求超时，请重试。')
+    if (failure instanceof TypeError) throw new Error('暂时无法连接分析服务，请重试。')
+    throw failure
   }
-  return body as T
 }
 
 export function getWorkspace(token: AccountToken, signal: AbortSignal): Promise<Workspace> {

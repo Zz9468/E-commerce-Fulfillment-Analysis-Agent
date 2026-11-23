@@ -32,6 +32,14 @@ _INVESTIGATE = re.compile(
 )
 _COMPARE = re.compile(r"比较|对比|环比|两[个月期]{1,3}|差了|变化|(?:与|和).{0,16}比")
 _SINGLE = re.compile(r"多少|只查|单月|数值|^查(?:看|询)?")
+_CARRIER = r"承运商|快递(?:公司)?|物流公司"
+_CARRIER_ATTRIBUTION = re.compile(
+    rf"(?:哪家|哪个|谁).{{0,6}}(?:{_CARRIER})|(?:{_CARRIER}).{{0,10}}(?:责任|导致|归因)|归因.{{0,8}}(?:{_CARRIER})"
+)
+
+
+def asks_carrier_attribution(question: str) -> bool:
+    return bool(_CARRIER_ATTRIBUTION.search(question))
 
 
 @dataclass(frozen=True)

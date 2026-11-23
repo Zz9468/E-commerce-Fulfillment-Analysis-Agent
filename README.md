@@ -4,18 +4,28 @@
 
 ## 本地运行
 
-以下命令在项目根目录执行，需安装 [uv](https://docs.astral.sh/uv/getting-started/installation/)、Docker Compose 和 Node.js。后端使用 Python 3.12，前端在 Node.js 24 上验证。依赖分别锁定在 [uv.lock](backend/uv.lock) 和 [package-lock.json](frontend/package-lock.json)。
+在项目根目录用 Docker Compose 启动。首次启动会创建 PostgreSQL 数据卷、应用迁移、配置两个只读登录，并导入 96 单合成数据。默认使用规则调查，无需模型密钥。
 
 ```powershell
-Copy-Item .env.example .env
+if (-not (Test-Path .env)) { Copy-Item .env.example .env }
+docker compose up -d --build --wait
+```
+
+打开[履约分析工作台](http://127.0.0.1:5173/)。可在 `.env` 用 `WORKSPACE_PORT` 和 `POSTGRES_PORT` 调整本地端口。Compose 会等待初始化和 API 就绪，重复启动沿用已发布的合成版本。
+
+### 本地开发
+
+后端使用 Python 3.12 和 [uv](https://docs.astral.sh/uv/getting-started/installation/)，前端使用 Node.js 24。已有旧版 `.env` 时，从示例补充 `QUERY_HQ_PASSWORD` 和 `QUERY_SP_PASSWORD`。以下命令只启动 Compose 数据库，API 和前端在宿主机运行。两种启动方式使用相同的工作台端口，切换前先停止占用端口的进程或服务。
+
+```powershell
+if (-not (Test-Path .env)) { Copy-Item .env.example .env }
 docker compose up -d --wait db
 uv sync --directory backend --locked
-uv run --directory backend --locked --env-file ../.env python -m app.migrate
-uv run --directory backend --locked --env-file ../.env python -m scripts.seed_demo
+uv run --directory backend --locked --env-file ../.env python -m scripts.bootstrap_demo
 npm --prefix frontend ci
 ```
 
-已有 `.env` 时沿用现有配置。数据库默认监听 `127.0.0.1:55432`，迁移和导入读取 `DATABASE_URL`。合成演示包含 96 单，重复初始化会返回同一数据版本。
+数据库默认监听 `127.0.0.1:55432`。迁移与导入使用 `DATABASE_URL`。查询由 API 按已认证账号选用 `fulfillment_query_hq` 或 `fulfillment_query_sp`。使用自备 PostgreSQL 时，可用 `QUERY_DB_HOST`、`QUERY_DB_PORT` 和 `QUERY_DB_NAME` 指定查询连接地址。
 
 打开两个终端启动后端和前端。
 
@@ -36,10 +46,13 @@ npm --prefix frontend run dev
 | 提前停止 | 2018 年 8 月和 9 月超期率变化原因。 |
 | 变化分散 | 2018 年 9 月和 10 月超期率变化原因。查看阶段证据。 |
 | 权限限制 | 切换到圣保罗州运营，再问 2018 年 8 月全国超期率。 |
+| 缺少归因证据 | 完成地区调查后追问「是哪家快递的问题？」，展开已核实的地区证据。 |
 
 ### 调查模式
 
 将 `.env` 内的 `ANALYSIS_MODE` 设为 `rule` 可运行规则调查，设为 `fixed` 可离线重放模型工具调用。两种模式都执行实际的 PostgreSQL 查询。`fixed` 重放默认地区调查示例，明确查数和手动下钻仍走单次查询。
+
+可用 `SQL_CONNECT_TIMEOUT_SECONDS` 和 `SQL_STATEMENT_TIMEOUT_MS` 调整数据库连接与单条 SQL 超时。Compose 的 `HTTP_REQUEST_TIMEOUT_SECONDS` 同时配置代理等候和浏览器请求超时，修改后运行 `docker compose up -d --build --wait`。使用 Vite 本地开发时，可在启动前设置 `VITE_HTTP_TIMEOUT_SECONDS`。各默认值见配置示例。 [.env.example](.env.example)
 
 真实模型配置可放在项目根目录的 `.env.model.local`，该文件由 Git 忽略。填写 `ANALYSIS_MODE=model`、`MODEL_BASE_URL`、`MODEL_NAME` 和 `MODEL_API_KEY`。`MODEL_BASE_URL` 使用兼容 API 的基础路径，后端会追加 `/chat/completions`。可用 `MODEL_TIMEOUT_SECONDS` 调整单次请求超时，按端点能力设置 `MODEL_REASONING_EFFORT`。
 
@@ -62,7 +75,7 @@ npm --prefix frontend run format:check
 npm --prefix frontend run build
 ```
 
-pytest 使用 `TEST_DATABASE_ADMIN_URL` 在每次运行时创建独立空库，应用迁移，并在结束时清理该次生成的测试库。使用自备 PostgreSQL 时，在 `.env` 中配置两个连接地址，测试连接的角色需能创建数据库。默认回归使用合成数据，无需模型密钥。
+pytest 使用 `TEST_DATABASE_ADMIN_URL` 创建独立空库和两个临时只读登录，测试结束后清理。维护连接和测试连接都需要管理本项目查询角色的权限，测试连接还需要建库权限。默认回归使用合成数据，无需模型密钥。
 
 显式运行真实模型冒烟。用例在隔离 PostgreSQL 中导入合成数据，验证真实模型请求了多步查询，以及最终响应中的证据 ID 与统计值。
 
@@ -75,6 +88,23 @@ uv run --directory backend --locked --env-file ../.env --env-file ../.env.model.
 ```powershell
 $env:PLAYWRIGHT_CHANNEL = 'chrome'
 npm --prefix frontend run test:e2e
+```
+
+可在独立 Compose 项目运行完整浏览器回归。此命令会在一个用例中短暂暂停该项目的数据库，并验证页面提示、历史证据与恢复查询。`PLAYWRIGHT_BASE_URL` 指向这个项目时，Playwright 直接访问 Compose 工作台。
+
+```powershell
+$env:POSTGRES_PORT = '55433'
+$env:WORKSPACE_PORT = '55173'
+$env:PLAYWRIGHT_CHANNEL = 'chrome'
+$env:PLAYWRIGHT_BASE_URL = 'http://127.0.0.1:55173'
+$env:PLAYWRIGHT_FAULT_COMPOSE_PROJECT = 'fulfillment-m3-check'
+docker compose --env-file .env.example -p fulfillment-m3-check up -d --build --wait
+npm --prefix frontend run test:e2e
+
+$env:ANALYSIS_MODE = 'fixed'
+$env:PLAYWRIGHT_EXPECTED_MODE = 'fixed'
+docker compose --env-file .env.example -p fulfillment-m3-check up -d --wait
+npm --prefix frontend run test:e2e -- -g '固定模式'
 ```
 
 ## 导入和复算 Olist

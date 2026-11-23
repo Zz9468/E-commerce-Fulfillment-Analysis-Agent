@@ -8,7 +8,13 @@ from pydantic import ValidationError
 
 from app.answers import FIELD_NAMES, answer_for, result_status, scope_name
 from app.auth import Session
-from app.conditions import Period, mentioned_states, resolve_question
+from app.conditions import (
+    Period,
+    QuestionContext,
+    asks_carrier_attribution,
+    mentioned_states,
+    resolve_question,
+)
 from app.investigations import (
     evidence_highlight,
     model_investigation,
@@ -212,6 +218,8 @@ def _analyze(
                 answer="一次提问可指定一个州。也可以查询全部地区并按州拆分。",
             )
         state = context.state or session.account.state
+        if asks_carrier_attribution(request.question):
+            return _carrier_attribution(run, context, state)
         if context.group_by == GroupBy.CITY and not state:
             missing.append("state")
         session.context = context
@@ -274,4 +282,42 @@ def _scope_denied(run: ToolRun) -> AnalysisResponse:
         analysis_id=run.analysis_id,
         status="scope_denied",
         answer=f"当前账号可查范围为{scope_name(run.session.account.state)}。请在此范围内提问。",
+    )
+
+
+def _carrier_attribution(
+    run: ToolRun, context: QuestionContext, state: str | None
+) -> AnalysisResponse:
+    month = Period(context.year, context.month).iso() if context.month else None
+    baseline_month = context.baseline.iso() if context.baseline else None
+    evidence = []
+    for prior in reversed(run.session.analyses.values()):
+        if not prior.effective_query or prior.effective_query.city != context.city:
+            continue
+        evidence = [
+            item
+            for item in prior.evidence
+            if isinstance(item.result, DeliveryComparison)
+            and item.result.group_by in {GroupBy.STATE, GroupBy.CITY}
+            and item.result.month == month
+            and item.result.baseline_month == baseline_month
+            and (state is None or item.result.state == state)
+            and result_status(item, context.city) in {"answered", "partial"}
+        ]
+        if evidence:
+            break
+    answer = "确认具体承运商的责任需要承运商标识和物流轨迹。"
+    if evidence:
+        item = evidence[-1]
+        detail = (
+            evidence_highlight(item, context.ranking)
+            or f"已核实{scope_name(item.result.state)}的地区明细。"
+        )
+        answer = detail + answer
+    return AnalysisResponse(
+        session_id=run.session.session_id,
+        analysis_id=run.analysis_id,
+        status="partial" if evidence else "unsupported",
+        answer=answer,
+        evidence=evidence,
     )

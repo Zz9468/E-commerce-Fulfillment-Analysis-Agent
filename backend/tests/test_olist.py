@@ -18,6 +18,7 @@ REFERENCE_SQL = Path(__file__).resolve().parents[2] / "eval" / "reference_sql"
 def test_olist_matches_reference_sql(
     db: Connection,
     migrated_database_url: str,
+    query_database_urls: dict[str, str],
     pytestconfig: pytest.Config,
 ) -> None:
     directory = pytestconfig.getoption("--olist-dir")
@@ -144,7 +145,9 @@ def test_olist_matches_reference_sql(
             assert stage.p50_days == pytest.approx(float(reference[f"{name}_p50"]))
             assert stage.p90_days == pytest.approx(float(reference[f"{name}_p90"]))
 
-    with TestClient(create_app(migrated_database_url, mode="rule")) as client:
+    with TestClient(
+        create_app(query_database_urls=query_database_urls, mode="rule")
+    ) as client:
         payload = {
             "mode": "question",
             "dataset_id": str(dataset.dataset_id),

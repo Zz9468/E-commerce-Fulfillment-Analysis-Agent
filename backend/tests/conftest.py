@@ -1,4 +1,5 @@
 import os
+import secrets
 from collections.abc import Iterator
 from uuid import uuid4
 
@@ -7,6 +8,7 @@ import pytest
 from psycopg import Connection, sql
 from psycopg.conninfo import make_conninfo
 
+from app.database import QUERY_ROLES, provision_query_login
 from app.migrate import migrate
 
 
@@ -41,9 +43,36 @@ def test_database_url() -> Iterator[str]:
 
 @pytest.fixture(scope="session")
 def migrated_database_url(test_database_url: str) -> str:
-    assert "001_order_data.sql" in migrate(test_database_url)
+    assert migrate(test_database_url) == [
+        "001_order_data.sql",
+        "002_query_permissions.sql",
+    ]
     assert migrate(test_database_url) == []
     return test_database_url
+
+
+@pytest.fixture(scope="session")
+def query_database_urls(migrated_database_url: str) -> Iterator[dict[str, str]]:
+    logins = {}
+    with psycopg.connect(migrated_database_url, autocommit=True) as admin:
+        try:
+            with admin.transaction():
+                for account_id, role in QUERY_ROLES.items():
+                    login = f"test_{account_id[-2:]}_{uuid4().hex}"
+                    password = secrets.token_urlsafe(32)
+                    provision_query_login(admin, role, login, password)
+                    logins[login] = (
+                        account_id,
+                        make_conninfo(
+                            migrated_database_url, user=login, password=password
+                        ),
+                    )
+            yield dict(logins.values())
+        finally:
+            for login in logins:
+                admin.execute(
+                    sql.SQL("DROP ROLE IF EXISTS {}").format(sql.Identifier(login))
+                )
 
 
 @pytest.fixture

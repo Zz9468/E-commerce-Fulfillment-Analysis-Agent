@@ -1,5 +1,13 @@
 name: fulfillment-analysis
 
+x-backend: &backend
+  image: fulfillment-analysis-backend:local
+  build: ./backend
+
+x-query-passwords: &query-passwords
+  QUERY_HQ_PASSWORD: ${QUERY_HQ_PASSWORD:-fulfillment_hq_dev}
+  QUERY_SP_PASSWORD: ${QUERY_SP_PASSWORD:-fulfillment_sp_dev}
+
 services:
   db:
     image: postgres:18.6
@@ -16,6 +24,63 @@ services:
       interval: 2s
       timeout: 3s
       retries: 20
+
+  setup:
+    <<: *backend
+    command: ["python", "-m", "scripts.bootstrap_demo"]
+    environment:
+      <<: *query-passwords
+      PGHOST: db
+      PGUSER: ${POSTGRES_USER:-fulfillment}
+      PGPASSWORD: ${POSTGRES_PASSWORD:?Copy .env.example to .env}
+      PGDATABASE: ${POSTGRES_DB:-fulfillment}
+    depends_on:
+      db:
+        condition: service_healthy
+
+  api:
+    <<: *backend
+    environment:
+      <<: *query-passwords
+      QUERY_DB_HOST: db
+      QUERY_DB_PORT: "5432"
+      QUERY_DB_NAME: ${POSTGRES_DB:-fulfillment}
+      SQL_CONNECT_TIMEOUT_SECONDS: ${SQL_CONNECT_TIMEOUT_SECONDS:-5}
+      SQL_STATEMENT_TIMEOUT_MS: ${SQL_STATEMENT_TIMEOUT_MS:-5000}
+      DEFAULT_DATASET_SOURCE: ${DEFAULT_DATASET_SOURCE:-synthetic}
+      ANALYSIS_MODE: ${ANALYSIS_MODE:-rule}
+      MODEL_BASE_URL: ${MODEL_BASE_URL:-}
+      MODEL_NAME: ${MODEL_NAME:-}
+      MODEL_API_KEY: ${MODEL_API_KEY:-}
+      MODEL_TIMEOUT_SECONDS: ${MODEL_TIMEOUT_SECONDS:-20}
+      MODEL_REASONING_EFFORT: ${MODEL_REASONING_EFFORT:-}
+    depends_on:
+      setup:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD", "python", "-c", "from urllib.request import Request, urlopen; urlopen(Request('http://127.0.0.1:8000/api/workspace', headers={'Authorization': 'Bearer demo-hq'}), timeout=3).close()"]
+      interval: 2s
+      timeout: 5s
+      retries: 15
+
+  web:
+    build:
+      context: ./frontend
+      args:
+        VITE_HTTP_TIMEOUT_SECONDS: ${HTTP_REQUEST_TIMEOUT_SECONDS:-240}
+    environment:
+      HTTP_REQUEST_TIMEOUT_SECONDS: ${HTTP_REQUEST_TIMEOUT_SECONDS:-240}
+    ports:
+      - "127.0.0.1:${WORKSPACE_PORT:-5173}:80"
+    depends_on:
+      api:
+        condition: service_healthy
+        restart: true
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1/"]
+      interval: 2s
+      timeout: 3s
+      retries: 15
 
 volumes:
   postgres_data:

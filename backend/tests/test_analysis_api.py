@@ -12,14 +12,16 @@ SP = {"Authorization": "Bearer demo-sp"}
 
 
 @pytest.fixture
-def client(migrated_database_url):
+def client(migrated_database_url, query_database_urls):
     import_dataset(
         migrated_database_url,
         FIXTURES / "synthetic_orders.csv",
         FIXTURES / "synthetic_customers.csv",
         source="synthetic",
     )
-    with TestClient(create_app(migrated_database_url, mode="rule")) as client:
+    with TestClient(
+        create_app(query_database_urls=query_database_urls, mode="rule")
+    ) as client:
         yield client
 
 
@@ -123,6 +125,80 @@ def test_authorized_range_and_stage_query(client):
     )
 
 
+def test_sp_workspace_and_own_drilldown_stay_in_scope(client):
+    hq = client.get("/api/workspace", headers=HQ).json()
+    sp = client.get("/api/workspace", headers=SP).json()
+    dataset_id = hq["default_dataset_id"]
+    assert sp["default_dataset_id"] == dataset_id
+    assert (
+        next(item for item in hq["datasets"] if item["dataset_id"] == dataset_id)[
+            "order_count"
+        ]
+        == 5
+    )
+    assert (
+        next(item for item in sp["datasets"] if item["dataset_id"] == dataset_id)[
+            "order_count"
+        ]
+        == 4
+    )
+
+    reply = ask(client, "2018年8月按州查已送达订单数", headers=SP)
+    assert [row["region"] for row in reply["evidence"][0]["result"]["rows"]] == ["SP"]
+    payload = {
+        "mode": "drilldown",
+        "session_id": reply["session_id"],
+        "source_evidence_id": reply["evidence"][0]["evidence_id"],
+    }
+    outside = client.post("/api/analysis", headers=SP, json={**payload, "state": "RJ"})
+    assert outside.status_code == 404
+    inside = client.post("/api/analysis", headers=SP, json={**payload, "state": "SP"})
+    assert inside.status_code == 200
+    assert inside.json()["evidence"][0]["result"]["state"] == "SP"
+
+
+def test_api_refuses_a_query_login_from_the_wrong_scope(query_database_urls):
+    config = {**query_database_urls, "demo-sp": query_database_urls["demo-hq"]}
+    with TestClient(create_app(query_database_urls=config, mode="rule")) as client:
+        assert client.get("/api/workspace", headers=SP).status_code == 503
+        reply = client.post(
+            "/api/analysis",
+            headers=SP,
+            json={
+                "mode": "question",
+                "question": "2018年8月超期率",
+            },
+        )
+    assert reply.status_code == 503
+    assert reply.json()["status"] == "unavailable"
+    assert reply.json()["session_id"] is None
+    assert not reply.json()["evidence"]
+
+
+def test_missing_handoff_and_successful_empty_stage_query(
+    client, migrated_database_url, tmp_path
+):
+    original = (FIXTURES / "synthetic_orders.csv").read_text(encoding="utf-8")
+    orders = tmp_path / "orders_without_handoff.csv"
+    orders.write_text(
+        "\n".join(line.rsplit(",", 1)[0] for line in original.splitlines()) + "\n",
+        encoding="utf-8",
+    )
+    dataset_id = import_dataset(
+        migrated_database_url,
+        orders,
+        FIXTURES / "synthetic_customers.csv",
+        source="without-handoff",
+    ).dataset_id
+    missing = ask(client, "2018年8月配送阶段耗时", dataset_id=str(dataset_id))
+    assert missing["status"] == "unsupported"
+    assert not missing["evidence"][0]["result"]["supported"]
+    empty = ask(client, "2018年9月配送阶段耗时")
+    assert empty["status"] == "no_data"
+    assert empty["evidence"][0]["result"]["supported"]
+    assert empty["trace"][0]["status"] == "ok"
+
+
 def test_no_data_zero_and_one_period_are_distinct(client):
     assert ask(client, "2018年9月已送达订单数")["status"] == "answered"
     assert ask(client, "2018年9月超期率")["status"] == "no_data"
@@ -131,6 +207,24 @@ def test_no_data_zero_and_one_period_are_distinct(client):
     assert small["status"] == "partial"
     assert len(small["trace"]) == 1
     assert "5 个有效样本" in small["answer"]
+
+
+def test_carrier_attribution_reuses_only_confirmed_regional_evidence(client):
+    fresh = ask(client, "是哪家快递的问题？")
+    assert fresh["status"] == "unsupported"
+    assert "承运商标识" in fresh["answer"] and "物流轨迹" in fresh["answer"]
+    assert not fresh["trace"] and not fresh["evidence"]
+
+    first = ask(client, "2018年7月和8月按州比较超期单数增量")
+    follow_up = ask(client, "是哪家快递的问题？", session_id=first["session_id"])
+    assert follow_up["status"] == "partial"
+    assert follow_up["evidence"] == first["evidence"]
+    assert not follow_up["trace"]
+    assert "圣保罗州" in follow_up["answer"] and "物流轨迹" in follow_up["answer"]
+    different = ask(
+        client, "2019年8月是哪家快递的问题？", session_id=first["session_id"]
+    )
+    assert different["status"] == "unsupported" and not different["evidence"]
 
 
 def test_explicit_conditions_replace_defaults_and_inferred_baseline(client):

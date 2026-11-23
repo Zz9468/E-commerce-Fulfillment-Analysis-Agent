@@ -98,7 +98,7 @@ async function run(request: AnalysisRequest, title: string) {
   try {
     const reply = await postAnalysis(account.value, request, controller.signal)
     if (analysisRequest !== controller) return
-    sessionId.value = reply.session_id
+    if (reply.session_id) sessionId.value = reply.session_id
     resultList.value.unshift({ title, reply })
   } catch (failure) {
     if (analysisRequest === controller) error.value = (failure as Error).message

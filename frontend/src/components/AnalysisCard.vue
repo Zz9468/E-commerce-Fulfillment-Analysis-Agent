@@ -101,7 +101,7 @@ const evidenceById = computed(
 
     <div v-if="reply.trace.length || reply.evidence.length" class="evidence-area">
       <h3>查询证据</h3>
-      <ol class="trace-list">
+      <ol v-if="reply.trace.length" class="trace-list">
         <li v-for="step in reply.trace" :key="step.sequence">
           <details>
             <summary>
@@ -141,6 +141,28 @@ const evidenceById = computed(
           </details>
         </li>
       </ol>
+      <ul v-else class="trace-list">
+        <li v-for="item in reply.evidence" :key="item.evidence_id">
+          <details>
+            <summary><span class="step-title">已核实的地区证据</span></summary>
+            <div class="trace-details">
+              <p class="trace-meta">
+                {{ scope(item.result.state) }} ·
+                {{ item.result.baseline_month ? `${item.result.baseline_month} → ` : ''
+                }}{{ item.result.month }}
+              </p>
+              <EvidenceTable
+                :evidence="item"
+                :ranking="reply.effective_query?.ranking ?? 'late_count'"
+                @drill="(id, state) => emit('drill', id, state)"
+              />
+              <p class="trace-meta evidence-id">
+                口径 v{{ item.result.metric_version }} · 证据 {{ item.evidence_id }}
+              </p>
+            </div>
+          </details>
+        </li>
+      </ul>
     </div>
   </article>
 </template>
