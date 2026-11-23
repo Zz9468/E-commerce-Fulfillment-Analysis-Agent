@@ -14,6 +14,11 @@ def pytest_addoption(parser: pytest.Parser) -> None:
     parser.addoption(
         "--olist-dir", help="Directory containing the two original Olist CSVs"
     )
+    parser.addoption(
+        "--live-model",
+        action="store_true",
+        help="Run the live model smoke test with MODEL_BASE_URL, MODEL_NAME and MODEL_API_KEY",
+    )
 
 
 @pytest.fixture(scope="session")

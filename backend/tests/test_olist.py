@@ -4,10 +4,12 @@ from hashlib import sha256
 from pathlib import Path
 
 import pytest
+from fastapi.testclient import TestClient
 from psycopg import Connection
 from psycopg.rows import dict_row
 
 from app.import_data import import_dataset
+from app.main import create_app
 from app.queries import compare_delivery, compare_delivery_stages
 
 REFERENCE_SQL = Path(__file__).resolve().parents[2] / "eval" / "reference_sql"
@@ -141,3 +143,33 @@ def test_olist_matches_reference_sql(
             assert stage.excluded_count == reference["excluded_count"]
             assert stage.p50_days == pytest.approx(float(reference[f"{name}_p50"]))
             assert stage.p90_days == pytest.approx(float(reference[f"{name}_p90"]))
+
+    with TestClient(create_app(migrated_database_url, mode="rule")) as client:
+        payload = {
+            "mode": "question",
+            "dataset_id": str(dataset.dataset_id),
+            "question": "2018年7月和8月超期率变化，排查新增超期集中在哪些地区",
+        }
+        response = client.post(
+            "/api/analysis", json=payload, headers={"Authorization": "Bearer demo-hq"}
+        )
+    assert response.status_code == 200
+    analysis = response.json()
+    assert analysis["status"] == "answered"
+    assert [step["parameters"]["group_by"] for step in analysis["trace"]] == [
+        "none",
+        "state",
+        "city",
+    ]
+    assert "79.4%" in analysis["answer"]
+    assert "73 单" in analysis["answer"]
+    sp_city = next(
+        row
+        for row in analysis["evidence"][-1]["result"]["rows"]
+        if row["region"] == "sao paulo"
+    )
+    assert (
+        sp_city["baseline"]["numerator"],
+        sp_city["current"]["numerator"],
+        sp_city["late_count_delta"],
+    ) == (51, 124, 73)

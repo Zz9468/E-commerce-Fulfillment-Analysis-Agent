@@ -2,7 +2,13 @@
 name = "fulfillment-analysis"
 version = "0.1.0"
 requires-python = ">=3.12,<3.13"
-dependencies = ["psycopg[binary]>=3.3,<4"]
+dependencies = [
+    "fastapi>=0.135,<1",
+    "httpx>=0.28,<1",
+    "psycopg[binary]>=3.3,<4",
+    "pydantic>=2.12,<3",
+    "uvicorn>=0.41,<1",
+]
 
 [dependency-groups]
 dev = ["pytest>=9,<10", "ruff>=0.15,<0.16"]
